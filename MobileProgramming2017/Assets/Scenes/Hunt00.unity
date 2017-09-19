@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMove: 0
   verticalMove: 0
+  tumbleTrigger: 0
 --- !u!1 &920612838
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour {
 
-
     // slide variable
     Vector2 slideStartPosition;
     Vector2 prevPosition;
@@ -16,8 +15,7 @@ public class InputManager : MonoBehaviour {
     public float horizontalMove;
     public float verticalMove;
 
-    
-    
+    public bool tumbleTrigger = false;
 	
 	// Update is called once per frame
 	void Update () {
@@ -55,6 +53,16 @@ public class InputManager : MonoBehaviour {
         }
 
         prevPosition = GetCursorPosition();
+
+        // tumble
+        if (Input.GetButtonDown("Jump"))
+        {
+            tumbleTrigger = true;
+        }
+        else
+        {
+            tumbleTrigger = false;
+        }
 	}
 
     

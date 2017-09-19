@@ -6,7 +6,7 @@ public class CharacterMove : MonoBehaviour {
 
     const float GravityPower = 9.8f;
     
-    const float StoppingDistance = 0.6f;
+    const float StoppingDistance = 0.01f;
 
     Vector3 velocity = Vector3.zero;
 
@@ -20,7 +20,9 @@ public class CharacterMove : MonoBehaviour {
 
     public Vector3 destination;
 
+    public float currentSpeed = 6.0f;
     public float walkSpeed = 6.0f;
+    public float tumbleSpeed = 12.0f;
     public float rotationSpeed = 360.0f;
 
 	// Use this for initialization
@@ -52,7 +54,7 @@ public class CharacterMove : MonoBehaviour {
             }
             else
             {
-                velocity = direction * walkSpeed;
+                velocity = direction * currentSpeed;
             }
 
             // smoothing
@@ -98,6 +100,14 @@ public class CharacterMove : MonoBehaviour {
 
     public void SetDestination(Vector3 destination)
     {
+        currentSpeed = walkSpeed;
+        arrived = false;
+        this.destination = destination;
+    }
+
+    public void SetTumbleDestination(Vector3 destination)
+    {
+        currentSpeed = tumbleSpeed;
         arrived = false;
         this.destination = destination;
     }

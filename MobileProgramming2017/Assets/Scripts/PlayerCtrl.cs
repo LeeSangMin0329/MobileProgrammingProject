@@ -5,21 +5,56 @@ using UnityEngine;
 public class PlayerCtrl : MonoBehaviour {
 
     InputManager inputManager;
+    CharacterMove characterMove;
 
     public Vector3 movementHorizon;
     public Vector3 movementVertical;
+    public Vector3 tumbleDestination;
+    public float tumbleDistance = 150f;
+
     public Camera charactorCamera;
 
     public float speed = 200f;
 
+
+
+    enum State { Walk, Tumble};
+    State state = State.Walk;
+
     // Use this for initialization
     void Start () {
         inputManager = FindObjectOfType<InputManager>();
+        characterMove = FindObjectOfType<CharacterMove>();
+        tumbleDestination = Vector3.zero;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Walking();
+
+        if(inputManager.tumbleTrigger)
+        {
+            StartTumble();
+        }
+
+        switch (state)
+        {
+            case State.Walk:
+                Walking();
+                break;
+            case State.Tumble:
+                if(Vector3.Distance(transform.position, tumbleDestination) < 0.1f)
+                {
+                    state = State.Walk;
+                }
+                else
+                {
+                    characterMove.SetTumbleDestination(tumbleDestination);
+                }
+                break;
+        }
+        
+
+        
 	}
 
     void Walking()
@@ -34,6 +69,12 @@ public class PlayerCtrl : MonoBehaviour {
 
 
 
-        SendMessage("SetDestination", transform.position + (movementHorizon + movementVertical) * speed * Time.deltaTime);
+        characterMove.SetDestination(transform.position + (movementHorizon + movementVertical) * speed * Time.deltaTime);
+    }
+
+    public void StartTumble()
+    {
+        state = State.Tumble;
+        tumbleDestination = transform.position + transform.forward * tumbleDistance * Time.deltaTime;
     }
 }
