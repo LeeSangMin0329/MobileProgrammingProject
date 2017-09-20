@@ -24,21 +24,22 @@ public class PlayerCtrl : MonoBehaviour {
     // Use this for initialization
     void Start () {
         inputManager = FindObjectOfType<InputManager>();
-        characterMove = FindObjectOfType<CharacterMove>();
+        characterMove = GetComponent<CharacterMove>();
         tumbleDestination = Vector3.zero;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if(inputManager.tumbleTrigger)
-        {
-            StartTumble();
-        }
+        
 
         switch (state)
         {
             case State.Walk:
+                if (inputManager.tumbleTrigger)
+                {
+                    StartTumble();
+                }
                 Walking();
                 break;
             case State.Tumble:
