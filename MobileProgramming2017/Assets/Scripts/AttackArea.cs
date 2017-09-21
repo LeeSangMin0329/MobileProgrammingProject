@@ -15,6 +15,19 @@ public class AttackArea : MonoBehaviour {
     }
     // ~Inner class
 
+    // Use this for initialization
+    void Start()
+    {
+        status = transform.root.GetComponent<CharacterStatus>();
+        ownCollider = transform.GetComponent<Collider>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
     AttackInfo GetAttackInfo()
     {
         AttackInfo attackInfo = new AttackInfo();
@@ -42,14 +55,5 @@ public class AttackArea : MonoBehaviour {
         ownCollider.enabled = false;
     }
 
-    // Use this for initialization
-    void Start () {
-        status = transform.root.GetComponent<CharacterStatus>();
-        ownCollider = transform.GetComponent<Collider>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    
 }

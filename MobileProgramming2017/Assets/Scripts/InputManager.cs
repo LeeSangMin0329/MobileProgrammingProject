@@ -11,11 +11,12 @@ public class InputManager : MonoBehaviour {
     bool moved = false;
 
 
-    // charactor move
+    // charactor Ctrl
     public float horizontalMove;
     public float verticalMove;
 
     public bool tumbleTrigger = false;
+    public bool attackTrigger = false;
 	
 	// Update is called once per frame
 	void Update () {
@@ -62,6 +63,16 @@ public class InputManager : MonoBehaviour {
         else
         {
             tumbleTrigger = false;
+        }
+
+        // attack
+        if (Input.GetButtonDown("Fire2"))
+        {
+            attackTrigger = true;
+        }
+        else
+        {
+            attackTrigger = false;
         }
 	}
 

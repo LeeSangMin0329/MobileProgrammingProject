@@ -147,19 +147,56 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114119023478822842, guid: 0fe952e4662828941a4062add46ff3a2,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114883185075588378, guid: 0fe952e4662828941a4062add46ff3a2,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 1468434719628810, guid: 0fe952e4662828941a4062add46ff3a2, type: 2}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0fe952e4662828941a4062add46ff3a2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &395558421 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1468434719628810, guid: 0fe952e4662828941a4062add46ff3a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 395558420}
+--- !u!114 &395558422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 395558421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaeabbc7c350314faab18b1169b74d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &395558423
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 395558421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!54 &395558424
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 395558421}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &766627256
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,22 +530,6 @@ MonoBehaviour:
   verticalAngle: 10
   lookTarget: {fileID: 1322012504}
   offset: {x: 0, y: 0, z: 0}
---- !u!1 &1541354656 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1508120543463554, guid: e7011af659e63ce429100281cd152890,
-    type: 2}
-  m_PrefabInternal: {fileID: 1322012497}
---- !u!114 &1541354657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1541354656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40e8b9ff5f9c57c46884a8f545228e5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1716385405
 GameObject:
   m_ObjectHideFlags: 0

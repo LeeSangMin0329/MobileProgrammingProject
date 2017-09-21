@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 4513777545801080}
   - component: {fileID: 65891581237781764}
   - component: {fileID: 54291655497927708}
+  - component: {fileID: 114350607588246060}
   m_Layer: 10
   m_Name: Hips
   m_TagString: Untagged
@@ -596,7 +597,10 @@ GameObject:
   - component: {fileID: 4532559294026774}
   - component: {fileID: 33213335187427256}
   - component: {fileID: 23819485238753358}
-  m_Layer: 0
+  - component: {fileID: 136394220201248088}
+  - component: {fileID: 54948308619684462}
+  - component: {fileID: 114987940443780410}
+  m_Layer: 12
   m_Name: Sword01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1339,6 +1343,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &54948308619684462
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865206043114532}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65891581237781764
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1414,6 +1433,17 @@ MonoBehaviour:
   tumbleDistance: 150
   charactorCamera: {fileID: 0}
   speed: 200
+--- !u!114 &114350607588246060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508120543463554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e8b9ff5f9c57c46884a8f545228e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114426276720536594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1431,6 +1461,30 @@ MonoBehaviour:
   walkSpeed: 6
   tumbleSpeed: 12
   rotationSpeed: 360
+--- !u!114 &114987940443780410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865206043114532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaeabbc7c350314faab18b1169b74d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &136394220201248088
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865206043114532}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.58}
 --- !u!137 &137642861090070688
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
