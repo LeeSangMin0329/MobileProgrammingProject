@@ -637,9 +637,10 @@ GameObject:
   - component: {fileID: 114315798209874160}
   - component: {fileID: 114022055438842154}
   - component: {fileID: 114023645582000144}
+  - component: {fileID: 114738602203911388}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1461,6 +1462,17 @@ MonoBehaviour:
   walkSpeed: 6
   tumbleSpeed: 12
   rotationSpeed: 360
+--- !u!114 &114738602203911388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1955202277060284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f073a91637928154aadf3dd35a620f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114987940443780410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1577,7 +1589,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 20
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}

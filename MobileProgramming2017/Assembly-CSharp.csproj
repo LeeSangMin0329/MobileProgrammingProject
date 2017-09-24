@@ -52,13 +52,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AttackArea.cs" />
+     <Compile Include="Assets\Scripts\AttackAreaActivator.cs" />
      <Compile Include="Assets\Scripts\CharaAnimation.cs" />
      <Compile Include="Assets\Scripts\CharacterMove.cs" />
      <Compile Include="Assets\Scripts\CharacterStatus.cs" />
+     <Compile Include="Assets\Scripts\EnemyCtrl.cs" />
      <Compile Include="Assets\Scripts\FollowCamera.cs" />
+     <Compile Include="Assets\Scripts\GameRuleCtrl.cs" />
      <Compile Include="Assets\Scripts\HitArea.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\PlayerCtrl.cs" />
+     <Compile Include="Assets\Scripts\SearchArea.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
