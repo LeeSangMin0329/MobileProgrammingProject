@@ -46,6 +46,7 @@ public class AttackArea : MonoBehaviour {
     // @override
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("sdfsdf");
         other.SendMessage("Damage", GetAttackInfo());
         status.lastAttackTarget = other.transform.root.gameObject;
     }
