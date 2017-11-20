@@ -9,12 +9,19 @@ public class CharaAnimation : MonoBehaviour {
     Vector3 prePosition;
     bool isDown = false;
     bool attacked = false;
+    bool rolled = false;
 
+    // propertiy
     public bool IsAttacked()
     {
         return attacked;
     }
+    public bool IsRolled()
+    {
+        return rolled;
+    }
 
+    // animation event handling
     void StartAttackHit()
     {
         Debug.Log("Start Attack Hit");
@@ -30,6 +37,17 @@ public class CharaAnimation : MonoBehaviour {
         attacked = true;
     }
 
+    void RollStart()
+    {
+        rolled = true;
+    }
+
+    void RollEnd()
+    {
+        rolled = false;
+    }
+    //~ end
+    
 	// Use this for initialization
 	void Start () {
 
@@ -37,7 +55,6 @@ public class CharaAnimation : MonoBehaviour {
         status = GetComponent<CharacterStatus>();
 
         prePosition = transform.position;
-
 	}
 
     // Update is called once per frame
@@ -57,6 +74,9 @@ public class CharaAnimation : MonoBehaviour {
             isDown = true;
             animator.SetTrigger("Down");
         }
+
+        animator.SetBool("Rolling", rolled);
+
 
         prePosition = transform.position;
 	}
