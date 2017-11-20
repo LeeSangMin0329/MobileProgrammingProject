@@ -4,52 +4,100 @@ using UnityEngine;
 
 public class CharaAnimation : MonoBehaviour {
 
+    InputManager inputManager;
+
     Animator animator;
     CharacterStatus status;
     Vector3 prePosition;
     bool isDown = false;
-    bool attacked = false;
-    bool rolled = false;
+    bool attacked01 = false;
+    bool attacked05 = false;
+
+    bool tumbled = false;
+
+    bool uncontrollableMotion = true;
+
 
     // propertiy
     public bool IsAttacked()
     {
-        return attacked;
+        return attacked01 || attacked05;
     }
-    public bool IsRolled()
+   
+    public bool IsTumbleEnd()
     {
-        return rolled;
+        return tumbled;
     }
 
     // animation event handling
-    void StartAttackHit()
+
+    // Basic Attack 1
+    void StartAttack01()
     {
-        Debug.Log("Start Attack Hit");
+        uncontrollableMotion = true;
+    }
+    void StartAttackHit01()
+    {
+        Debug.Log("Start Attack Hit 1");
     }
 
-    void EndAttackHit()
+    void EndAttackHit01()
     {
-        Debug.Log("End Attack Hit");
+        Debug.Log("End Attack Hit 1");
+        uncontrollableMotion = false;
     }
 
-    void EndAttack()
+    void EndAttack01()
     {
-        attacked = true;
+        attacked01 = true;
+        uncontrollableMotion = true;
     }
 
-    void RollStart()
+    // Basic Attack 2
+    void StartAttack05()
     {
-        rolled = true;
+        uncontrollableMotion = true;
+    }
+    void StartAttackHit05()
+    {
+        Debug.Log("Start Attack Hit 5");
     }
 
-    void RollEnd()
+    void EndAttackHit05()
     {
-        rolled = false;
+        Debug.Log("End Attack Hit 5");
+        uncontrollableMotion = false;
     }
-    //~ end
-    
-	// Use this for initialization
-	void Start () {
+
+    void EndAttack05()
+    {
+        attacked05 = true;
+        uncontrollableMotion = true;
+    }
+
+    // Tumbling
+    void StartTumbling()
+    {
+       
+    }
+    void StartTumblingNoHit()
+    {
+
+    }
+    void EndTumblingNoHit()
+    {
+        
+    }
+    void EndTumbling()
+    {
+        tumbled = true;
+    }
+    // ~animation event handling
+
+    // Use this for initialization
+    void Start () {
+
+        inputManager = FindObjectOfType<InputManager>();
 
         animator = GetComponent<Animator>();
         status = GetComponent<CharacterStatus>();
@@ -59,23 +107,40 @@ public class CharaAnimation : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        // move
         Vector3 deltaPosition = transform.position - prePosition;
         animator.SetFloat("Speed", deltaPosition.magnitude / Time.deltaTime);
 
-        if (attacked && !status.attacking)
+
+        
+        // Basic attack
+        if (attacked01 && !status.basicAttack1)
         {
-            attacked = false;
+            attacked01 = false;
         }
+        else if (attacked05 && !status.basicAttack2)
+        {
+            attacked05 = false;
+        }
+    
+        animator.SetBool("BasicAttack1", (!attacked01 && status.basicAttack1));
+        animator.SetBool("BasicAttack2", (!attacked05 && status.basicAttack2));
 
-        animator.SetBool("Attacking", (!attacked && status.attacking));
+     
+        // tumbling
+        if (tumbled && !status.tumbling)
+        {
+            tumbled = false;
+        }
+        animator.SetBool("Tumbling", (!tumbled && status.tumbling));
 
-        if(!isDown && status.died)
+
+        // Died
+        if (!isDown && status.died)
         {
             isDown = true;
             animator.SetTrigger("Down");
         }
-
-        animator.SetBool("Rolling", rolled);
 
 
         prePosition = transform.position;

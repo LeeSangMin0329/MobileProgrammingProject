@@ -16,7 +16,8 @@ public class InputManager : MonoBehaviour {
     public float verticalMove;
 
     public bool tumbleTrigger = false;
-    public bool attackTrigger = false;
+    public bool basicAttackTrigger1 = false;
+    public bool basicAttackTrigger2 = false;
 	
 	// Update is called once per frame
 	void Update () {
@@ -66,15 +67,23 @@ public class InputManager : MonoBehaviour {
         }
 
         // attack
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("BasicAttack1"))
         {
-            attackTrigger = true;
+            basicAttackTrigger1 = true;
         }
         else
         {
-            attackTrigger = false;
+            basicAttackTrigger1 = false;
         }
-	}
+        if (Input.GetButtonDown("BasicAttack2"))
+        {
+            basicAttackTrigger2 = true;
+        }
+        else
+        {
+            basicAttackTrigger2 = false;
+        }
+    }
 
     
 

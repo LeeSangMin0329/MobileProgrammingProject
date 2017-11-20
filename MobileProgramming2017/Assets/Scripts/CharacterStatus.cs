@@ -14,7 +14,9 @@ public class CharacterStatus : MonoBehaviour {
 
 
     // animation variable
-    public bool attacking = false;
+    public bool basicAttack1 = false;
+    public bool basicAttack2 = false;
+    public bool tumbling = false;
     public bool died = false;
 
 	// Use this for initialization

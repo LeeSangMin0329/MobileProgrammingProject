@@ -144,7 +144,7 @@ public class EnemyCtrl : MonoBehaviour {
     void AttackStart()
     {
         StateStartCommon();
-        status.attacking = true;
+        status.basicAttack1 = true;
 
         Vector3 targetDirection = (attackTarget.position - transform.position).normalized;
         SendMessage("SetDirection", targetDirection);
@@ -185,7 +185,7 @@ public class EnemyCtrl : MonoBehaviour {
 
     void StateStartCommon()
     {
-        status.attacking = false;
+        status.basicAttack1 = false;
         status.died = false;
     }
 
