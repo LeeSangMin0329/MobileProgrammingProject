@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class CharaAnimation : MonoBehaviour {
 
-    InputManager inputManager;
-
+   
     Animator animator;
     CharacterStatus status;
     Vector3 prePosition;
     bool isDown = false;
     bool attacked01 = false;
     bool attacked05 = false;
+    bool attacked09 = false;
 
     bool tumbled = false;
 
-    bool uncontrollableMotion = true;
-
+    
 
     // propertiy
     public bool IsAttacked()
     {
-        return attacked01 || attacked05;
+        return attacked01 || attacked05 || attacked09;
     }
    
     public bool IsTumbleEnd()
@@ -34,7 +33,7 @@ public class CharaAnimation : MonoBehaviour {
     // Basic Attack 1
     void StartAttack01()
     {
-        uncontrollableMotion = true;
+        status.uncontrollableMotion = true;
     }
     void StartAttackHit01()
     {
@@ -44,19 +43,21 @@ public class CharaAnimation : MonoBehaviour {
     void EndAttackHit01()
     {
         Debug.Log("End Attack Hit 1");
-        uncontrollableMotion = false;
+        status.uncontrollableMotion = false;
     }
-
+    void EndCancel01()
+    {
+        status.uncontrollableMotion = true;
+    }
     void EndAttack01()
     {
         attacked01 = true;
-        uncontrollableMotion = true;
     }
 
     // Basic Attack 2
     void StartAttack05()
     {
-        uncontrollableMotion = true;
+        status.uncontrollableMotion = true;
     }
     void StartAttackHit05()
     {
@@ -66,19 +67,43 @@ public class CharaAnimation : MonoBehaviour {
     void EndAttackHit05()
     {
         Debug.Log("End Attack Hit 5");
-        uncontrollableMotion = false;
+        status.uncontrollableMotion = false;
     }
-
+    void EndCancel05()
+    {
+        status.uncontrollableMotion = true;
+    }
     void EndAttack05()
     {
         attacked05 = true;
-        uncontrollableMotion = true;
+    }
+
+    // basic attack 3
+    void StartAttack09()
+    {
+        status.uncontrollableMotion = true;
+    }
+    void StartAttackHit09()
+    {
+
+    }
+    void EndAttackHit09()
+    {
+        status.uncontrollableMotion = false;
+    }
+    void EndCancel09()
+    {
+        status.uncontrollableMotion = true;
+    }
+    void EndAttack09()
+    {
+        attacked09 = true;
     }
 
     // Tumbling
     void StartTumbling()
     {
-       
+        status.uncontrollableMotion = true;
     }
     void StartTumblingNoHit()
     {
@@ -90,14 +115,13 @@ public class CharaAnimation : MonoBehaviour {
     }
     void EndTumbling()
     {
+        status.uncontrollableMotion = false;
         tumbled = true;
     }
     // ~animation event handling
 
     // Use this for initialization
     void Start () {
-
-        inputManager = FindObjectOfType<InputManager>();
 
         animator = GetComponent<Animator>();
         status = GetComponent<CharacterStatus>();
@@ -118,13 +142,18 @@ public class CharaAnimation : MonoBehaviour {
         {
             attacked01 = false;
         }
-        else if (attacked05 && !status.basicAttack2)
+        if (attacked05 && !status.basicAttack2)
         {
             attacked05 = false;
+        }
+        if(attacked09 && !status.basicAttack3)
+        {
+            attacked09 = false;
         }
     
         animator.SetBool("BasicAttack1", (!attacked01 && status.basicAttack1));
         animator.SetBool("BasicAttack2", (!attacked05 && status.basicAttack2));
+        animator.SetBool("BasicAttack3", (!attacked09 && status.basicAttack3));
 
      
         // tumbling
@@ -132,7 +161,7 @@ public class CharaAnimation : MonoBehaviour {
         {
             tumbled = false;
         }
-        animator.SetBool("Tumbling", (!tumbled && status.tumbling));
+        animator.SetBool("Tumbling", (!tumbled && status.tumbling) && status.tumbling);
 
 
         // Died
@@ -141,7 +170,6 @@ public class CharaAnimation : MonoBehaviour {
             isDown = true;
             animator.SetTrigger("Down");
         }
-
 
         prePosition = transform.position;
 	}

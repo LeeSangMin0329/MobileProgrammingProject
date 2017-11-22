@@ -18,7 +18,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 
 
-    enum State { Walk, Tumble, Attack1, Attack2, Died,};
+    enum State { Walk, Tumble, Attack1, Attack2, Attack3, Died,};
     State state = State.Walk;
     State nextState = State.Walk;
 
@@ -53,6 +53,10 @@ public class PlayerCtrl : MonoBehaviour {
                 {
                     ChangeState(State.Attack2);
                 }
+                else if (inputManager.basicAttackTrigger3)
+                {
+                    ChangeState(State.Attack3);
+                }
                 if (inputManager.tumbleTrigger)
                 {
                     ChangeState(State.Tumble);
@@ -68,6 +72,9 @@ public class PlayerCtrl : MonoBehaviour {
                 Attacking();
                 break;
             case State.Attack2:
+                Attacking();
+                break;
+            case State.Attack3:
                 Attacking();
                 break;
         }
@@ -88,6 +95,9 @@ public class PlayerCtrl : MonoBehaviour {
                     break;
                 case State.Attack2:
                     AttackStart(2);
+                    break;
+                case State.Attack3:
+                    AttackStart(3);
                     break;
                 case State.Died:
                     Died();
@@ -149,10 +159,20 @@ public class PlayerCtrl : MonoBehaviour {
         if(type == 1)
         {
             status.basicAttack1 = true;
+            status.basicAttack2 = false;
+            status.basicAttack3 = false;
         }
         else if(type == 2)
         {
+            status.basicAttack1 = false;
             status.basicAttack2 = true;
+            status.basicAttack3 = false;
+        }
+        else if(type == 3)
+        {
+            status.basicAttack1 = false;
+            status.basicAttack2 = false;
+            status.basicAttack3 = true;
         }
         
 
@@ -164,6 +184,10 @@ public class PlayerCtrl : MonoBehaviour {
         if (charaAnimation.IsAttacked())
         {
             ChangeState(State.Walk);
+        }
+        else if (status.uncontrollableMotion == false && inputManager.tumbleTrigger)
+        {
+            ChangeState(State.Tumble);
         }
     }
 
@@ -184,9 +208,17 @@ public class PlayerCtrl : MonoBehaviour {
         movementVertical.y = 0;
         movementVertical.z = inputManager.verticalMove * charactorCamera.transform.forward.z;
 
-        tumbleDestination = transform.position + (movementHorizon + movementVertical) * tumbleDistance * Time.deltaTime;
+        if((movementHorizon + movementVertical) == Vector3.zero)
+        {
+            tumbleDestination = transform.position + transform.forward * tumbleDistance * Time.deltaTime;
+        }
+        else
+        {
+            transform.LookAt(transform.position + (movementHorizon + movementVertical));
+            tumbleDestination = transform.position + transform.forward * tumbleDistance * Time.deltaTime;
+        }
 
-        status.tumbling = true;
+        
     }
 
     void Tumbling()
@@ -197,6 +229,7 @@ public class PlayerCtrl : MonoBehaviour {
         }
         else
         {
+            status.tumbling = true;
             characterMove.SetTumbleDestination(tumbleDestination);
         }
     }
@@ -215,6 +248,7 @@ public class PlayerCtrl : MonoBehaviour {
     {
         status.basicAttack1 = false;
         status.basicAttack2 = false;
+        status.basicAttack3 = false;
         status.died = false;
         status.tumbling = false;
     }
