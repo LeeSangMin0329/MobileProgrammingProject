@@ -78,6 +78,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\3D Assets\Enemy\DragonTerrorBringer\Scripts\CameraControl.cs" />
+    <Compile Include="Assets\3D Assets\Enemy\DragonTerrorBringer\Scripts\MaterialChange.cs" />
+    <Compile Include="Assets\3D Assets\Enemy\DragonTerrorBringer\Scripts\playerControl.cs" />
     <Compile Include="Assets\Scripts\AttackArea.cs" />
     <Compile Include="Assets\Scripts\AttackAreaActivator.cs" />
     <Compile Include="Assets\Scripts\CharaAnimation.cs" />
@@ -90,9 +93,9 @@
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\SearchArea.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\3D Assets\Enemy\Rhino\Sheder\StandardDoubleSided.shader" />
+    <Compile Include="Assets\Scripts\TerrorDragonAnimation.cs" />
+    <Compile Include="Assets\Scripts\TerrorDragonCtrl.cs" />
+    <Compile Include="Assets\Scripts\TerrorDragonStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

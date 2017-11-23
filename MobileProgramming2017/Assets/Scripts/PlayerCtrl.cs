@@ -104,30 +104,6 @@ public class PlayerCtrl : MonoBehaviour {
                     break;
             }
         }
-        /*
-        switch (state)
-        {
-            case State.Walk:
-                if (inputManager.tumbleTrigger)
-                {
-                    StartTumble();
-                }
-                Walking();
-                break;
-            case State.Tumble:
-                if(Vector3.Distance(transform.position, tumbleDestination) < 0.1f)
-                {
-                    state = State.Walk;
-                }
-                else
-                {
-                    characterMove.SetTumbleDestination(tumbleDestination);
-                }
-                break;
-        }
-        */
-
-        
 	}
 
     void ChangeState(State nextState)
@@ -214,8 +190,9 @@ public class PlayerCtrl : MonoBehaviour {
         }
         else
         {
-            transform.LookAt(transform.position + (movementHorizon + movementVertical));
-            tumbleDestination = transform.position + transform.forward * tumbleDistance * Time.deltaTime;
+            //transform.LookAt(transform.position + (movementHorizon + movementVertical));
+            characterMove.SetDirection((movementHorizon + movementVertical));
+            tumbleDestination = transform.position + (movementHorizon + movementVertical) * tumbleDistance * Time.deltaTime;
         }
 
         
@@ -230,7 +207,9 @@ public class PlayerCtrl : MonoBehaviour {
         else
         {
             status.tumbling = true;
+            
             characterMove.SetTumbleDestination(tumbleDestination);
+            
         }
     }
 

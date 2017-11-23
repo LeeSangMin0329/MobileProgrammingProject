@@ -29,6 +29,14 @@ public class CharaAnimation : MonoBehaviour {
     }
 
     // animation event handling
+    //idle
+    void StartIdle()
+    {
+        if (animator.GetBool("Tumbling"))
+        {
+            animator.Play("tumbling");
+        }
+    }
 
     // Basic Attack 1
     void StartAttack01()
