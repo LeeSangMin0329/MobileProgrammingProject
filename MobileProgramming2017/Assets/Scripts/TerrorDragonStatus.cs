@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TerrorDragonStatus : MonoBehaviour {
 
+    public bool running = false;
+
 	// Use this for initialization
 	void Start () {
 		

@@ -6,16 +6,17 @@ public class TerrorDragonCtrl : MonoBehaviour {
 
     CharacterMove characterMove;
 
-    enum State { Walk, BreathFire, Idle, Bite, WingStrike, Shout,
+    enum State { Walk, BreathFire, Run, Bite, WingStrike, Shout,
         FlightUp, FlightTurning, FlightRush, FlightDown, Flighting, FlightFire}
     State state = State.Walk;
-    State nextState = State.Walk;
+    State nextState = State.Run;
 
-    CharacterStatus status;
+    TerrorDragonStatus status;
     TerrorDragonAnimation terrAnimation;
     Transform attackTarget;
 
     Vector3 basePosition;
+    bool firstEngage = true;
 
     public float waitBaseTime = 2.0f; // motion to motion max delay
     float waitTime;
@@ -27,7 +28,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
 	void Start () {
         characterMove = GetComponent<CharacterMove>();
 
-        status = GetComponent<CharacterStatus>();
+        status = GetComponent<TerrorDragonStatus>();
         terrAnimation = GetComponent<TerrorDragonAnimation>();
 
         basePosition = transform.position;
@@ -43,7 +44,8 @@ public class TerrorDragonCtrl : MonoBehaviour {
             case State.Walk:
                 Walking();
                 break;
-            case State.Idle:
+            case State.Run:
+                Running();
                 break;
 
             case State.BreathFire:
@@ -78,7 +80,8 @@ public class TerrorDragonCtrl : MonoBehaviour {
                 case State.Walk:
                     WalkStart();
                     break;
-                case State.Idle:
+                case State.Run:
+                    RunStart();
                     break;
 
                 case State.BreathFire:
@@ -121,22 +124,52 @@ public class TerrorDragonCtrl : MonoBehaviour {
             {
                 Vector2 randomValue = Random.insideUnitCircle * walkRange;
                 Vector3 destinationPosition = basePosition + new Vector3(randomValue.x, 0.0f, randomValue.y);
-                SendMessage("SetDestination", destinationPosition);
+                characterMove.SetDestination(destinationPosition);
             }
         }
         else
         {
             if (characterMove.Arrived())
             {
+                basePosition = transform.position;
                 waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
             }
             // discover user
             if (attackTarget)
             {
-                ChangeState(State.Shout);
+                if (firstEngage)
+                {
+                    ChangeState(State.Shout);
+                }
+                else
+                {
+                    // random pattern
+                }
+                
             }
         }
-        
+    }
+
+    void RunStart()
+    {
+        StateStartCommon();
+        status.running = true;
+    }
+    void Running()
+    {
+        if(attackTarget == null)
+        {
+            if (characterMove.Arrived())
+            {
+                Vector2 randomValue = Random.insideUnitCircle * walkRange * walkRange;
+                Vector3 destinationPosition = transform.position + new Vector3(randomValue.x, 0.0f, randomValue.y);
+                characterMove.SetTumbleDestination(destinationPosition);
+            }
+        }
+        else
+        {
+            // attack run
+        }
     }
 
     void ChangeState(State nextState)

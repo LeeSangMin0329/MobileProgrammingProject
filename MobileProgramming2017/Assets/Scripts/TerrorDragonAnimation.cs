@@ -11,6 +11,8 @@ public class TerrorDragonAnimation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
+        status = GetComponent<TerrorDragonStatus>();
+        prePosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -18,6 +20,7 @@ public class TerrorDragonAnimation : MonoBehaviour {
         Vector3 deltaPosition = transform.position - prePosition;
         animator.SetFloat("Speed", deltaPosition.magnitude / Time.deltaTime);
 
+        animator.SetBool("Running", status.running);
 
 
         prePosition = transform.position;
