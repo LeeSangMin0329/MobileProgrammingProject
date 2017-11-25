@@ -12,7 +12,7 @@ public class CharacterMove : MonoBehaviour {
 
     CharacterController characterController;
 
-    public bool arrived = false;
+    bool arrived = false;
 
     // forced move
     bool forceRotate = false;

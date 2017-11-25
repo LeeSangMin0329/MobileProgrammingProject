@@ -5,6 +5,10 @@ using UnityEngine;
 public class TerrorDragonStatus : MonoBehaviour {
 
     public bool running = false;
+    public bool shouting = false;
+    public bool biting = false;
+    public bool breathing = false;
+    public bool wingStriking = false;
 
 	// Use this for initialization
 	void Start () {

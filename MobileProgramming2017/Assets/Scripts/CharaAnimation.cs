@@ -169,7 +169,7 @@ public class CharaAnimation : MonoBehaviour {
         {
             tumbled = false;
         }
-        animator.SetBool("Tumbling", (!tumbled && status.tumbling) && status.tumbling);
+        animator.SetBool("Tumbling", (!tumbled && status.tumbling));
 
 
         // Died

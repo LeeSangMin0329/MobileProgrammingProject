@@ -6,14 +6,15 @@ public class TerrorDragonCtrl : MonoBehaviour {
 
     CharacterMove characterMove;
 
-    enum State { Walk, BreathFire, Run, Bite, WingStrike, Shout,
+    enum State { Walk, BreathFire, Run, Chasing, Bite, WingStrike, Shout,
         FlightUp, FlightTurning, FlightRush, FlightDown, Flighting, FlightFire}
     State state = State.Walk;
-    State nextState = State.Run;
+    State nextState = State.Walk;
 
     TerrorDragonStatus status;
     TerrorDragonAnimation terrAnimation;
-    Transform attackTarget;
+    // -public
+    public Transform attackTarget;
 
     Vector3 basePosition;
     bool firstEngage = true;
@@ -21,6 +22,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     public float waitBaseTime = 2.0f; // motion to motion max delay
     float waitTime;
     public float walkRange = 5.0f;
+    float stopDistanceTargetToOwn = 5.0f;
 
     
 
@@ -47,15 +49,22 @@ public class TerrorDragonCtrl : MonoBehaviour {
             case State.Run:
                 Running();
                 break;
+            case State.Chasing:
+                Chasing();
+                break;
 
             case State.BreathFire:
+                Breathing();
                 break;
             case State.Bite:
+                Biting();
                 break;
             case State.WingStrike:
+                WingStriking();
                 break;
 
             case State.Shout:
+                Shouting();
                 break;
 
             case State.FlightUp:
@@ -83,15 +92,22 @@ public class TerrorDragonCtrl : MonoBehaviour {
                 case State.Run:
                     RunStart();
                     break;
+                case State.Chasing:
+                    ChaseStart();
+                    break;
 
                 case State.BreathFire:
+                    BreathStart();
                     break;
                 case State.Bite:
+                    BiteStart();
                     break;
                 case State.WingStrike:
+                    WingStrikeStart();
                     break;
 
                 case State.Shout:
+                    ShoutStart();
                     break;
 
                 case State.FlightUp:
@@ -139,11 +155,13 @@ public class TerrorDragonCtrl : MonoBehaviour {
             {
                 if (firstEngage)
                 {
+                    firstEngage = false;
                     ChangeState(State.Shout);
                 }
                 else
                 {
                     // random pattern
+                    ChangeState(State.Chasing);
                 }
                 
             }
@@ -172,13 +190,122 @@ public class TerrorDragonCtrl : MonoBehaviour {
         }
     }
 
+    void ChaseStart()
+    {
+        StateStartCommon();
+        characterMove.SetTumbleDestination(attackTarget.position);
+        status.running = true;
+    }
+    void Chasing()
+    {
+        if (Vector3.Distance(attackTarget.position, transform.position) <= stopDistanceTargetToOwn)
+        {
+            characterMove.StopMove();
+            // random ground attack state
+            int randomValue = Random.Range(0, 3);
+            if(randomValue == 0)
+            {
+                ChangeState(State.Bite);
+            }
+            else if(randomValue == 1)
+            {
+                ChangeState(State.BreathFire);
+            }
+            else
+            {
+                ChangeState(State.WingStrike);
+            }
+        }
+        else if (characterMove.Arrived())
+        {
+            ChangeState(State.Walk);
+        }
+    }
+
+    void BiteStart()
+    {
+        StateStartCommon();
+        status.biting = true;
+        Vector3 targetDirection = (attackTarget.position - transform.position).normalized;
+        characterMove.SetDirection(targetDirection);
+
+        characterMove.StopMove();
+    }
+    void Biting()
+    {
+        if (terrAnimation.IsBited())
+        {
+            ChangeState(State.Walk);
+        }
+    }
+
+    void BreathStart()
+    {
+        StateStartCommon();
+        status.breathing = true;
+        Vector3 targetDirection = (attackTarget.position - transform.position).normalized;
+        characterMove.SetDirection(targetDirection);
+
+        characterMove.StopMove();
+    }
+    void Breathing()
+    {
+        if (terrAnimation.IsBreathed())
+        {
+            ChangeState(State.Walk);
+        }
+    }
+
+    void ShoutStart()
+    {
+        StateStartCommon();
+        status.shouting = true;
+    }
+    void Shouting()
+    {
+        if(terrAnimation.IsShoutEnd())
+        {
+            // random state
+            ChangeState(State.Walk);
+        }
+
+        waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
+
+    }
+
+    void WingStrikeStart()
+    {
+        StateStartCommon();
+        status.wingStriking = true;
+        Vector3 targetDirection = (attackTarget.position - transform.position).normalized;
+        characterMove.SetDirection(targetDirection);
+
+        characterMove.StopMove();
+    }
+    void WingStriking()
+    {
+        if (terrAnimation.IsWingStriked())
+        {
+            ChangeState(State.Walk);
+        }
+    }
+
+    public void SetAttackTarget(Transform target)
+    {
+        attackTarget = target;
+    }
+
     void ChangeState(State nextState)
     {
+        Debug.Log("Change State " + nextState.ToString());
         this.nextState = nextState;
     }
     void StateStartCommon()
     {
-
+        status.running = false;
+        status.shouting = false;
+        status.biting = false;
+        status.breathing = false;
     }
 
 }

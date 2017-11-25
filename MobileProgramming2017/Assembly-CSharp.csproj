@@ -51,6 +51,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\3D Assets\Enemy\DragonTerrorBringer\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\3D Assets\Enemy\DragonTerrorBringer\Scripts\MaterialChange.cs" />
+     <Compile Include="Assets\3D Assets\Enemy\DragonTerrorBringer\Scripts\playerControl.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\FireBaseScript.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\FireCollisionForwardScript.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\FireConstantBaseScript.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\FireLightScript.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
+     <Compile Include="Assets\Effect\PyroParticles\Prefab\Script\SingleLineAttribute.cs" />
      <Compile Include="Assets\Scripts\AttackArea.cs" />
      <Compile Include="Assets\Scripts\AttackAreaActivator.cs" />
      <Compile Include="Assets\Scripts\CharaAnimation.cs" />
@@ -63,6 +73,11 @@
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\PlayerCtrl.cs" />
      <Compile Include="Assets\Scripts\SearchArea.cs" />
+     <Compile Include="Assets\Scripts\TerrorDragonAnimation.cs" />
+     <Compile Include="Assets\Scripts\TerrorDragonCtrl.cs" />
+     <Compile Include="Assets\Scripts\TerrorDragonStatus.cs" />
+     <None Include="Assets\Effect\PyroParticles\Prefab\Materials\AdditiveTintable.shader" />
+     <None Include="Assets\Effect\PyroParticles\Readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
