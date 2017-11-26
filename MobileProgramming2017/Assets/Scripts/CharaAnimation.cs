@@ -132,6 +132,7 @@ public class CharaAnimation : MonoBehaviour {
     void Start () {
 
         animator = GetComponent<Animator>();
+        
         status = GetComponent<CharacterStatus>();
 
         prePosition = transform.position;

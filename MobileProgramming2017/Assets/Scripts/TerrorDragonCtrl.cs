@@ -23,6 +23,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     float waitTime;
     public float walkRange = 5.0f;
     float stopDistanceTargetToOwn = 5.0f;
+    public float patternClassificationDistance = 20.0f;
 
     
 
@@ -68,14 +69,17 @@ public class TerrorDragonCtrl : MonoBehaviour {
                 break;
 
             case State.FlightUp:
+                FlightUP();
                 break;
             case State.FlightDown:
+                FlightDown();
                 break;
             case State.FlightFire:
                 break;
             case State.Flighting:
                 break;
             case State.FlightRush:
+                Running();
                 break;
             case State.FlightTurning:
                 break;
@@ -111,14 +115,17 @@ public class TerrorDragonCtrl : MonoBehaviour {
                     break;
 
                 case State.FlightUp:
+                    FlightUpStart();
                     break;
                 case State.FlightDown:
+                    FlightDownStart();
                     break;
                 case State.FlightFire:
                     break;
                 case State.Flighting:
                     break;
                 case State.FlightRush:
+                    RunStart();
                     break;
                 case State.FlightTurning:
                     break;
@@ -145,6 +152,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
         }
         else
         {
+            
             if (characterMove.Arrived())
             {
                 basePosition = transform.position;
@@ -160,10 +168,35 @@ public class TerrorDragonCtrl : MonoBehaviour {
                 }
                 else
                 {
+                    float patternDistance = Vector3.Distance(attackTarget.position, transform.position);
                     // random pattern
-                    ChangeState(State.Chasing);
+                    int randomValue = Random.Range(0, 4);
+                    if (randomValue == 0 && !status.flighting)
+                    {
+                        ChangeState(State.FlightUp);
+                    }
+                    else if (randomValue == 0 && status.flighting)
+                    {
+                        ChangeState(State.FlightDown);
+                    }
+                    else if (patternDistance > patternClassificationDistance && status.flighting)
+                    {
+                        ChangeState(State.FlightRush);
+                    }
+                    else if (!status.flighting && randomValue == 1)
+                    {
+                        ChangeState(State.Shout);
+                    }
+                    else
+                    {
+                        ChangeState(State.Chasing);
+                    }
                 }
                 
+            }
+            else
+            {
+                ChangeState(State.Walk);
             }
         }
     }
@@ -171,22 +204,29 @@ public class TerrorDragonCtrl : MonoBehaviour {
     void RunStart()
     {
         StateStartCommon();
-        status.running = true;
-    }
-    void Running()
-    {
-        if(attackTarget == null)
+        if (attackTarget == null)
         {
-            if (characterMove.Arrived())
-            {
-                Vector2 randomValue = Random.insideUnitCircle * walkRange * walkRange;
-                Vector3 destinationPosition = transform.position + new Vector3(randomValue.x, 0.0f, randomValue.y);
-                characterMove.SetTumbleDestination(destinationPosition);
-            }
+            Vector2 randomValue = Random.insideUnitCircle * walkRange * walkRange;
+            Vector3 destinationPosition = transform.position + new Vector3(randomValue.x, 0.0f, randomValue.y);
+            characterMove.SetTumbleDestination(destinationPosition);
         }
         else
         {
-            // attack run
+            Vector2 randomValue = Random.insideUnitCircle * walkRange;
+            Vector3 destinationPosition = attackTarget.position + new Vector3(randomValue.x, 0.0f, randomValue.y);
+            characterMove.SetTumbleDestination(destinationPosition);
+        }
+        status.running = true;
+        if (status.flighting)
+        {
+            status.flightRush = true;
+        }
+    }
+    void Running()
+    {
+        if (characterMove.Arrived())
+        {
+            ChangeState(State.Walk);
         }
     }
 
@@ -201,24 +241,33 @@ public class TerrorDragonCtrl : MonoBehaviour {
         if (Vector3.Distance(attackTarget.position, transform.position) <= stopDistanceTargetToOwn)
         {
             characterMove.StopMove();
-            // random ground attack state
-            int randomValue = Random.Range(0, 3);
-            if(randomValue == 0)
+            if (status.flighting)
             {
-                ChangeState(State.Bite);
-            }
-            else if(randomValue == 1)
-            {
-                ChangeState(State.BreathFire);
+                // random flight attack state
+                ChangeState(State.Walk);
             }
             else
             {
-                ChangeState(State.WingStrike);
+                // random ground attack state
+                int randomValue = Random.Range(0, 3);
+                if (randomValue == 0)
+                {
+                    ChangeState(State.Bite);
+                }
+                else if (randomValue == 1)
+                {
+                    ChangeState(State.BreathFire);
+                }
+                else
+                {
+                    ChangeState(State.WingStrike);
+                }
             }
         }
         else if (characterMove.Arrived())
         {
             ChangeState(State.Walk);
+            
         }
     }
 
@@ -260,6 +309,8 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         StateStartCommon();
         status.shouting = true;
+        characterMove.StopMove();
+        
     }
     void Shouting()
     {
@@ -290,6 +341,41 @@ public class TerrorDragonCtrl : MonoBehaviour {
         }
     }
 
+    void FlightUpStart()
+    {
+        StateStartCommon();
+        status.flighting = true;
+        characterMove.StopMove();
+               
+    }
+    void FlightUP()
+    {
+       // characterMove.SetHeight(-4.0f);
+        //characterMove.UseGravity(false);
+        if (terrAnimation.IsFlightUp())
+        {
+            // 1 chasing 2 up 3 rush
+            ChangeState(State.Walk);
+        }
+    }
+
+    void FlightDownStart()
+    {
+        StateStartCommon();
+        status.flighting = false;
+        characterMove.StopMove();
+    }
+    void FlightDown()
+    {
+        
+       // characterMove.SetHeight(1);
+        if (terrAnimation.IsFlightDown())
+        {
+        //    characterMove.UseGravity(true);
+            ChangeState(State.Walk);
+        }
+    }
+
     public void SetAttackTarget(Transform target)
     {
         attackTarget = target;
@@ -306,6 +392,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
         status.shouting = false;
         status.biting = false;
         status.breathing = false;
+        status.flightRush = false;
     }
 
 }

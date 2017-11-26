@@ -9,6 +9,8 @@ public class TerrorDragonStatus : MonoBehaviour {
     public bool biting = false;
     public bool breathing = false;
     public bool wingStriking = false;
+    public bool flighting = false;
+    public bool flightRush = false;
 
 	// Use this for initialization
 	void Start () {

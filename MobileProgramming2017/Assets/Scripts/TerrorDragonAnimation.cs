@@ -12,6 +12,8 @@ public class TerrorDragonAnimation : MonoBehaviour {
     bool bite = false;
     bool breath = false;
     bool wingStrike = false;
+    bool flightUp = false;
+    bool flightDown = false;
 
 
     public GameObject fireEffect;
@@ -33,6 +35,14 @@ public class TerrorDragonAnimation : MonoBehaviour {
     public bool IsWingStriked()
     {
         return wingStrike;
+    }
+    public bool IsFlightUp()
+    {
+        return flightUp;
+    }
+    public bool IsFlightDown()
+    {
+        return flightDown;
     }
 
     // event
@@ -82,6 +92,17 @@ public class TerrorDragonAnimation : MonoBehaviour {
         wingStrike = true;
     }
 
+    // flight up
+    void EndFlightUp()
+    {
+        flightUp = true;
+    }
+    // flight down
+    void EndFlightDown()
+    {
+        flightDown = true;
+    }
+
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
@@ -122,6 +143,20 @@ public class TerrorDragonAnimation : MonoBehaviour {
             wingStrike = false;
         }
         animator.SetBool("WingStriking", !wingStrike && status.wingStriking);
+
+        // flight up
+        if(flightUp && !status.flighting)
+        {
+            flightUp = false;
+        }
+        if(flightDown && !status.flighting)
+        {
+            flightDown = false;
+        }
+        animator.SetBool("FlightUp", status.flighting);
+
+        // flight rush
+        animator.SetBool("FlightRush", status.flightRush);
 
 
         prePosition = transform.position;
