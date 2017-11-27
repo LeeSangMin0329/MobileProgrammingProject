@@ -16,11 +16,16 @@ public class AttackArea : MonoBehaviour {
     }
     // ~Inner class
 
+    AttackInfo attackInfo; 
+    
+
     // Use this for initialization
     void Start()
     {
         status = transform.root.GetComponent<CharacterStatus>();
         ownCollider = transform.GetComponent<Collider>();
+        attackInfo = new AttackInfo();
+        ownCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -29,33 +34,31 @@ public class AttackArea : MonoBehaviour {
 
     }
 
-    AttackInfo GetAttackInfo()
+    void GetAttackInfo()
     {
-        AttackInfo attackInfo = new AttackInfo();
-
-        attackInfo.attackPower = status.Power;
+        //attackInfo.attackPower = status.Power;
         attackInfo.attacker = transform.root;
         attackInfo.collisionPosition = ownCollider.transform.position;
         //bug
-        attackInfo.collisionPosition.y = transform.root.position.y + 1;
-        
-
-        return attackInfo;
+        //attackInfo.collisionPosition.y = transform.root.position.y + 1;
+      
     }
 
     // @override
     void OnTriggerEnter(Collider other)
     {
-        other.SendMessage("Damage", GetAttackInfo());
+        GetAttackInfo();
+        other.transform.root.SendMessage("Damage", attackInfo);
         status.lastAttackTarget = other.transform.root.gameObject;
     }
 
-    void OnAttack()
+    public void OnAttack(int attackPower)
     {
+        attackInfo.attackPower = attackPower;
         ownCollider.enabled = true;
     }
 
-    void OnAttackTermination()
+    public void OnAttackTermination()
     {
         ownCollider.enabled = false;
     }

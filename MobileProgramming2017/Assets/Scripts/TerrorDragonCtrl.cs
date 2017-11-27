@@ -7,7 +7,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     CharacterMove characterMove;
 
     enum State { Walk, BreathFire, Run, Chasing, Bite, WingStrike, Shout,
-        FlightUp, FlightTurning, FlightRush, FlightDown, Flighting, FlightFire}
+        FlightUp, FlightTurning, FlightRush, FlightDown, Flighting, FlightFire, Died}
     State state = State.Walk;
     State nextState = State.Walk;
 
@@ -22,10 +22,11 @@ public class TerrorDragonCtrl : MonoBehaviour {
     public float waitBaseTime = 2.0f; // motion to motion max delay
     float waitTime;
     public float walkRange = 5.0f;
-    float stopDistanceTargetToOwn = 5.0f;
-    public float patternClassificationDistance = 20.0f;
+    float stopDistanceTargetToOwn = 6.0f;
+    public float patternClassificationDistance = 30.0f;
 
-    
+    //effect
+    public GameObject hitEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -75,6 +76,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
                 FlightDown();
                 break;
             case State.FlightFire:
+                FlightFire();
                 break;
             case State.Flighting:
                 break;
@@ -121,6 +123,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
                     FlightDownStart();
                     break;
                 case State.FlightFire:
+                    FlightFireStart();
                     break;
                 case State.Flighting:
                     break;
@@ -128,6 +131,9 @@ public class TerrorDragonCtrl : MonoBehaviour {
                     RunStart();
                     break;
                 case State.FlightTurning:
+                    break;
+                case State.Died:
+                    Died();
                     break;
             }
         }
@@ -226,7 +232,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         if (characterMove.Arrived())
         {
-            ChangeState(State.Walk);
+            ChangeState(State.Chasing);
         }
     }
 
@@ -244,7 +250,15 @@ public class TerrorDragonCtrl : MonoBehaviour {
             if (status.flighting)
             {
                 // random flight attack state
-                ChangeState(State.Walk);
+                int randomValue = Random.Range(0, 2);
+                if(randomValue == 0)
+                {
+                    ChangeState(State.Walk);
+                }
+                else
+                {
+                    ChangeState(State.FlightFire);
+                }
             }
             else
             {
@@ -372,13 +386,49 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         if (status.flightDontMove)
         {
-            characterMove.SetControllerOffsetY(1.7f);
+            characterMove.SetControllerOffsetY(1f);
         }
         
         if (terrAnimation.IsFlightDown())
         {
         //    characterMove.UseGravity(true);
             ChangeState(State.Walk);
+        }
+    }
+
+    void FlightFireStart()
+    {
+        StateStartCommon();
+        status.flightFire = true;
+    }
+    void FlightFire()
+    {
+        if (terrAnimation.IsFlightFire())
+        {
+            ChangeState(State.Walk);
+        }
+    }
+
+    void Died()
+    {
+        status.died = true;
+    }
+
+    void Damage(AttackArea.AttackInfo attackInfo)
+    {
+        if (hitEffect)
+        {
+            GameObject effect = Instantiate(hitEffect, attackInfo.collisionPosition, Quaternion.identity) as GameObject;
+
+            //effect.transform.position = attackInfo.collisionPosition;
+            Destroy(effect, 0.3f);
+        }
+       
+        status.HP -= attackInfo.attackPower;
+        if (status.HP <= 0)
+        {
+            status.HP = 0;
+            ChangeState(State.Died);
         }
     }
 
@@ -399,6 +449,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
         status.biting = false;
         status.breathing = false;
         status.flightRush = false;
+        status.flightFire = false;
     }
 
 }

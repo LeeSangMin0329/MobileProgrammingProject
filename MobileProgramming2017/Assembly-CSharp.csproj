@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\HitArea.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\PlayerCtrl.cs" />
+     <Compile Include="Assets\Scripts\PushCharacterCollision.cs" />
      <Compile Include="Assets\Scripts\SearchArea.cs" />
      <Compile Include="Assets\Scripts\TerrorDragonAnimation.cs" />
      <Compile Include="Assets\Scripts\TerrorDragonCtrl.cs" />

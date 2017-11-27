@@ -3771,7 +3771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85b1f790a1acef4fb44eb1a0f5eea40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrived: 0
+  targetControllerOffset: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
   currentSpeed: 6
   walkSpeed: 6
@@ -3860,7 +3860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85b1f790a1acef4fb44eb1a0f5eea40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrived: 0
+  targetControllerOffset: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
   currentSpeed: 6
   walkSpeed: 6
@@ -4194,7 +4194,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 20
+  m_SlopeLimit: 5
   m_StepOffset: 0.01
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0

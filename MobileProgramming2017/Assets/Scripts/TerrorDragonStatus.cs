@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TerrorDragonStatus : MonoBehaviour {
 
+    // flag
+
     public bool running = false;
     public bool shouting = false;
     public bool biting = false;
@@ -12,6 +14,12 @@ public class TerrorDragonStatus : MonoBehaviour {
     public bool flighting = false;
     public bool flightRush = false;
     public bool flightDontMove = false;
+    public bool flightFire = false;
+
+    public bool died = false;
+
+    // status
+    public int HP = 100000;
 
 	// Use this for initialization
 	void Start () {

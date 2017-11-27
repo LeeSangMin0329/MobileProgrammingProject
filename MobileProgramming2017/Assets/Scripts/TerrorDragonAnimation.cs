@@ -8,12 +8,14 @@ public class TerrorDragonAnimation : MonoBehaviour {
     TerrorDragonStatus status;
     Vector3 prePosition;
 
+    bool died = false;
     bool shout = false;
     bool bite = false;
     bool breath = false;
     bool wingStrike = false;
     bool flightUp = false;
     bool flightDown = false;
+    bool flightFire = false;
 
 
     public GameObject fireEffect;
@@ -43,6 +45,10 @@ public class TerrorDragonAnimation : MonoBehaviour {
     public bool IsFlightDown()
     {
         return flightDown;
+    }
+    public bool IsFlightFire()
+    {
+        return flightFire;
     }
 
     // event
@@ -113,6 +119,26 @@ public class TerrorDragonAnimation : MonoBehaviour {
         status.flightDontMove = false;
     }
 
+    // flight fire
+    void StartFlightFireHit()
+    {
+        if (fireEffect)
+        {
+            fireEffect.SetActive(true);
+        }
+    }
+    void EndFlightFireHit()
+    {
+        if (fireEffect)
+        {
+            fireEffect.SetActive(false);
+        }
+    }
+    void EndFlightFire()
+    {
+        flightFire = true;
+    }
+
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
@@ -168,6 +194,18 @@ public class TerrorDragonAnimation : MonoBehaviour {
         // flight rush
         animator.SetBool("FlightRush", status.flightRush);
 
+        // flight fire
+        if(flightFire && !status.flightFire)
+        {
+            flightFire = false;
+        }
+        animator.SetBool("FlightFire", !flightFire && status.flightFire);
+
+        if(!died && status.died)
+        {
+            died = true;
+            animator.SetTrigger("Died");
+        }
 
         prePosition = transform.position;
     }

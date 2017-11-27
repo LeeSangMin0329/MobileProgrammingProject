@@ -7,6 +7,7 @@ public class CharaAnimation : MonoBehaviour {
    
     Animator animator;
     CharacterStatus status;
+    AttackArea attackArea;
     Vector3 prePosition;
     bool isDown = false;
     bool attacked01 = false;
@@ -46,12 +47,14 @@ public class CharaAnimation : MonoBehaviour {
     void StartAttackHit01()
     {
         Debug.Log("Start Attack Hit 1");
+        attackArea.OnAttack(status.attack1Power);
     }
 
     void EndAttackHit01()
     {
         Debug.Log("End Attack Hit 1");
         status.uncontrollableMotion = false;
+        attackArea.OnAttackTermination();
     }
     void EndCancel01()
     {
@@ -70,12 +73,14 @@ public class CharaAnimation : MonoBehaviour {
     void StartAttackHit05()
     {
         Debug.Log("Start Attack Hit 5");
+        attackArea.OnAttack(status.attack2Power);
     }
 
     void EndAttackHit05()
     {
         Debug.Log("End Attack Hit 5");
         status.uncontrollableMotion = false;
+        attackArea.OnAttackTermination();
     }
     void EndCancel05()
     {
@@ -93,11 +98,12 @@ public class CharaAnimation : MonoBehaviour {
     }
     void StartAttackHit09()
     {
-
+        attackArea.OnAttack(status.attack3Power);
     }
     void EndAttackHit09()
     {
         status.uncontrollableMotion = false;
+        attackArea.OnAttackTermination();
     }
     void EndCancel09()
     {
@@ -136,6 +142,7 @@ public class CharaAnimation : MonoBehaviour {
         status = GetComponent<CharacterStatus>();
 
         prePosition = transform.position;
+        attackArea = GetComponentInChildren<AttackArea>();
 	}
 
     // Update is called once per frame

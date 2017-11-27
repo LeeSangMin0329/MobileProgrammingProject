@@ -7,11 +7,14 @@ public class CharacterStatus : MonoBehaviour {
     public int HP = 100;
     public int MaxHP = 100;
 
-    public int Power = 10;
+    public int Power = 100;
     public GameObject lastAttackTarget = null;
 
     public string characterName = "Player";
 
+    public int attack1Power = 30;
+    public int attack2Power = 50;
+    public int attack3Power = 50;
 
     // animation variable
     public bool basicAttack1 = false;
