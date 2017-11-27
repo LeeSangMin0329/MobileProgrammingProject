@@ -19,6 +19,8 @@ public class CharacterMove : MonoBehaviour {
     bool forceRotate = false;
     Vector3 forceRotateDirection;
     float height;
+    
+    public Vector3 targetControllerOffset;
 
     public Vector3 destination;
 
@@ -32,6 +34,7 @@ public class CharacterMove : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         destination = transform.position;
         height = transform.position.y;
+        targetControllerOffset = characterController.center;
 	}
 
     // Update is called once per frame
@@ -132,6 +135,18 @@ public class CharacterMove : MonoBehaviour {
             
         }
 
+        if (Vector3.Distance( characterController.center, targetControllerOffset) > 0.01f)
+        {
+            if(characterController.center.y > targetControllerOffset.y)
+            {
+                characterController.center = Vector3.Lerp(characterController.center, targetControllerOffset, Time.deltaTime);
+            }
+            else
+            {
+                characterController.center = Vector3.Lerp(characterController.center, targetControllerOffset, 0.4f * Time.deltaTime);
+            }
+        }
+
         Vector3 snapGround = Vector3.zero;
         if (useGravity)
         {
@@ -147,6 +162,8 @@ public class CharacterMove : MonoBehaviour {
         }
         else
         {
+           
+            // use up only not in ground position
             if (transform.position.y - height > 0.01f || transform.position.y - height < -0.01f)
             {
                 Vector3 basePosition = transform.position;
@@ -209,5 +226,11 @@ public class CharacterMove : MonoBehaviour {
     public void SetHeight(float height)
     {
         this.height = height;
+    }
+
+    public void SetControllerOffsetY(float height)
+    {
+        targetControllerOffset = characterController.center;
+        targetControllerOffset.y = height;
     }
 }

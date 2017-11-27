@@ -93,14 +93,24 @@ public class TerrorDragonAnimation : MonoBehaviour {
     }
 
     // flight up
+    void StartFlightUp()
+    {
+        status.flightDontMove = true;
+    }
     void EndFlightUp()
     {
         flightUp = true;
+        status.flightDontMove = false;
     }
     // flight down
+    void StartFlightDown()
+    {
+        status.flightDontMove = true;
+    }
     void EndFlightDown()
     {
         flightDown = true;
+        status.flightDontMove = false;
     }
 
 	// Use this for initialization

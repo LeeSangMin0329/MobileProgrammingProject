@@ -11,6 +11,7 @@ public class TerrorDragonStatus : MonoBehaviour {
     public bool wingStriking = false;
     public bool flighting = false;
     public bool flightRush = false;
+    public bool flightDontMove = false;
 
 	// Use this for initialization
 	void Start () {

@@ -345,12 +345,15 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         StateStartCommon();
         status.flighting = true;
-        characterMove.StopMove();
-               
+       
+
     }
     void FlightUP()
     {
-       // characterMove.SetHeight(-4.0f);
+        if (status.flightDontMove)
+        {
+            characterMove.SetControllerOffsetY(5.0f);
+        }
         //characterMove.UseGravity(false);
         if (terrAnimation.IsFlightUp())
         {
@@ -363,12 +366,15 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         StateStartCommon();
         status.flighting = false;
-        characterMove.StopMove();
+       
     }
     void FlightDown()
     {
+        if (status.flightDontMove)
+        {
+            characterMove.SetControllerOffsetY(1.7f);
+        }
         
-       // characterMove.SetHeight(1);
         if (terrAnimation.IsFlightDown())
         {
         //    characterMove.UseGravity(true);
