@@ -14,8 +14,8 @@ public class HitArea : MonoBehaviour {
 		
 	}
 
-    void Damage(AttackArea.AttackInfo attackInfo)
+    void Damage(int attackPower)
     {
-        transform.root.SendMessage("Damage", attackInfo);
+        transform.root.SendMessage("HitDamage", attackPower);
     }
 }

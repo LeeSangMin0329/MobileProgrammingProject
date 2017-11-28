@@ -423,7 +423,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
             //effect.transform.position = attackInfo.collisionPosition;
             Destroy(effect, 0.3f);
         }
-       
+        status.lastAttacker = attackInfo.attacker;
         status.HP -= attackInfo.attackPower;
         if (status.HP <= 0)
         {

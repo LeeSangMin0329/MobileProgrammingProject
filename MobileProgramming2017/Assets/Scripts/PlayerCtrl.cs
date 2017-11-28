@@ -213,9 +213,9 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
 
-    void Damage(AttackArea.AttackInfo attackInfo)
+    void HitDamage(int attackPower)
     {
-        status.HP -= attackInfo.attackPower;
+        status.HP -= attackPower;
         if (status.HP <= 0)
         {
             status.HP = 0;

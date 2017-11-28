@@ -18,6 +18,8 @@ public class TerrorDragonStatus : MonoBehaviour {
 
     public bool died = false;
 
+    public GameObject lastAttacker = null;
+
     // status
     public int HP = 100000;
 

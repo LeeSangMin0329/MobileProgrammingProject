@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterStatus : MonoBehaviour {
 
-    public int HP = 100;
-    public int MaxHP = 100;
+    public int HP = 1000;
+    public int MaxHP = 1000;
 
     public int Power = 100;
     public GameObject lastAttackTarget = null;

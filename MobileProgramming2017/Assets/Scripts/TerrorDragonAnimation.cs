@@ -8,6 +8,23 @@ public class TerrorDragonAnimation : MonoBehaviour {
     TerrorDragonStatus status;
     Vector3 prePosition;
 
+    // damage system activator
+    public EnemyAttackArea rightWing;
+    public EnemyAttackArea leftWing;
+    public EnemyAttackArea frontRightLeg;
+    public EnemyAttackArea frontLeftLeg;
+    public EnemyAttackArea rearRightLeg;
+    public EnemyAttackArea rearLeftLeg;
+    public EnemyAttackArea chest;
+    public EnemyAttackArea fire;
+    public EnemyAttackArea tail1;
+    public EnemyAttackArea tail2;
+    public EnemyAttackArea head;
+    public EnemyAttackArea neck;
+    
+
+
+    // animation state variable
     bool died = false;
     bool shout = false;
     bool bite = false;
@@ -67,21 +84,34 @@ public class TerrorDragonAnimation : MonoBehaviour {
     }
 
     //bite
+    void StartBite()
+    {
+        neck.SetAttackPower(200);
+        neck.OnAttack();
+        head.SetAttackPower(200);
+        head.OnAttack();
+    }
     void EndBite()
     {
+        neck.OnAttackTermination();
+        head.OnAttackTermination();
         bite = true;
     }
 
     // breath
     void StartBreathFire()
     {
+        
         if (fireEffect)
         {
             fireEffect.SetActive(true);
         }
+        fire.SetAttackPower(500);
+        fire.OnAttack();
     }
     void EndBreathFire()
     {
+        fire.OnAttackTermination();
         if (fireEffect)
         {
             fireEffect.SetActive(false);
@@ -93,8 +123,17 @@ public class TerrorDragonAnimation : MonoBehaviour {
     }
 
     // wing strike
+    void StartWingStrike()
+    {
+        rightWing.SetAttackPower(300);
+        rightWing.OnAttack();
+        leftWing.SetAttackPower(300);
+        leftWing.OnAttack();
+    }
     void EndWingStrike()
     {
+        rightWing.OnAttackTermination();
+        leftWing.OnAttackTermination();
         wingStrike = true;
     }
 
@@ -126,9 +165,12 @@ public class TerrorDragonAnimation : MonoBehaviour {
         {
             fireEffect.SetActive(true);
         }
+        fire.SetAttackPower(500);
+        fire.OnAttack();
     }
     void EndFlightFireHit()
     {
+        fire.OnAttackTermination();
         if (fireEffect)
         {
             fireEffect.SetActive(false);

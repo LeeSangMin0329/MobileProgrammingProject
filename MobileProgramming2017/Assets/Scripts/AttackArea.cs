@@ -11,7 +11,7 @@ public class AttackArea : MonoBehaviour {
     public class AttackInfo
     {
         public int attackPower;
-        public Transform attacker;
+        public GameObject attacker;
         public Vector3 collisionPosition;
     }
     // ~Inner class
@@ -37,7 +37,7 @@ public class AttackArea : MonoBehaviour {
     void GetAttackInfo()
     {
         //attackInfo.attackPower = status.Power;
-        attackInfo.attacker = transform.root;
+        attackInfo.attacker = transform.root.gameObject;
         attackInfo.collisionPosition = ownCollider.transform.position;
         //bug
         //attackInfo.collisionPosition.y = transform.root.position.y + 1;
