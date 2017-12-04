@@ -21,6 +21,8 @@ public class TerrorDragonAnimation : MonoBehaviour {
     public EnemyAttackArea tail2;
     public EnemyAttackArea head;
     public EnemyAttackArea neck;
+
+    public EnemyAttackArea shoutArea;
     
 
 
@@ -72,11 +74,12 @@ public class TerrorDragonAnimation : MonoBehaviour {
     //shout
     void StartShout()
     {
-       
+        shoutArea.SetAttackPower(0);
+        shoutArea.OnAttack();
     }
     void EndShoutHit()
     {
-
+        shoutArea.OnAttackTermination();
     }
     void EndShout()
     {

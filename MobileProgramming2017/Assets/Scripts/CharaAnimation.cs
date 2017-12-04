@@ -13,9 +13,12 @@ public class CharaAnimation : MonoBehaviour {
     bool attacked01 = false;
     bool attacked05 = false;
     bool attacked09 = false;
+    bool knockDown = false;
+    bool knockDownTrigger = false;
+    bool hit = false;
+    bool hitTrigger = false;
 
     bool tumbled = false;
-
     
 
     // propertiy
@@ -27,6 +30,10 @@ public class CharaAnimation : MonoBehaviour {
     public bool IsTumbleEnd()
     {
         return tumbled;
+    }
+    public bool IsHitted()
+    {
+        return (hit || knockDown);
     }
 
     // animation event handling
@@ -132,6 +139,30 @@ public class CharaAnimation : MonoBehaviour {
         status.uncontrollableMotion = false;
         tumbled = true;
     }
+
+    // hit animation
+    void StartKnockDown()
+    {
+        knockDownTrigger = true;
+    }
+    void EndKnockDown()
+    {
+
+    }
+    void EndGetUp()
+    {
+        knockDown = true;
+    }
+
+    void StartHit02()
+    {
+        hitTrigger = true;
+    }
+    void EndHit02()
+    {
+        hit = true;
+    }
+
     // ~animation event handling
 
     // Use this for initialization
@@ -179,7 +210,27 @@ public class CharaAnimation : MonoBehaviour {
         }
         animator.SetBool("Tumbling", (!tumbled && status.tumbling));
 
+        // hit animaiton
+        if(knockDown && !status.knockDown)
+        {
+            knockDown = false;
+        }
+        if(knockDownTrigger && !status.knockDown)
+        {
+            knockDownTrigger = false;
+        }
+        animator.SetBool("KnockDown", (!knockDownTrigger && status.knockDown));
 
+        if(hit && !status.hit)
+        {
+            hit = false;
+        }
+        if(hitTrigger && !status.hit)
+        {
+            hitTrigger = false;
+        }
+        animator.SetBool("Hit", (!hitTrigger && status.hit));
+        
         // Died
         if (!isDown && status.died)
         {

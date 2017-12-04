@@ -8,9 +8,18 @@ public class EnemyAttackArea : MonoBehaviour {
     bool collisionTrigger = false;
     public int attackPower = 250;
 
+    //Inner class
+    public class AttackInfo
+    {
+        public Vector3 hitDirection;
+        public int attackPower;
+    };
+
+    AttackInfo attackInfo;
+
     // Use this for initialization
     void Start () {
-       
+        attackInfo = new AttackInfo();
 	}
 	
 	// Update is called once per frame
@@ -21,9 +30,16 @@ public class EnemyAttackArea : MonoBehaviour {
     {
         if (collisionTrigger)
         {
-            Debug.Log("Hit"+this.gameObject.ToString());
-            other.transform.SendMessage("Damage", attackPower);
-            
+            if (other.transform.tag == "Player")
+            {
+                Vector3 direction = transform.root.position - other.transform.position;
+                direction.y = 0;
+                direction = direction.normalized;
+                attackInfo.hitDirection = direction;
+                attackInfo.attackPower = attackPower;
+
+                other.transform.SendMessage("Damage", attackInfo);
+            }
         }
     }
 

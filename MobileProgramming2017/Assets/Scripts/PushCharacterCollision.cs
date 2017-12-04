@@ -18,10 +18,14 @@ public class PushCharacterCollision : MonoBehaviour {
 
     void OnTriggerStay(Collider hit)
     {
-        Debug.Log("on trigger hit");
-        Vector3 direction = transform.position - hit.transform.position;
-        direction = direction.normalized;
+        if(hit.transform.tag == "Enemy")
+        {
+            Debug.Log("on trigger hit");
+            Vector3 direction = transform.position - hit.transform.position;
+            direction = direction.normalized;
 
-        charController.Move(direction * speed * Time.deltaTime);
+            charController.Move(direction * speed * Time.deltaTime);
+        }
+        
     }
 }

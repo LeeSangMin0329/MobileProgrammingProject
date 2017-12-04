@@ -16,9 +16,10 @@ public class PlayerCtrl : MonoBehaviour {
 
     public float speed = 200f;
 
-
-
-    enum State { Walk, Tumble, Attack1, Attack2, Attack3, Died,};
+    bool immortal = false;
+    bool shoutDamageTrigger = false;
+    
+    enum State { Walk, Tumble, Attack1, Attack2, Attack3, Died, Hit,};
     State state = State.Walk;
     State nextState = State.Walk;
 
@@ -40,7 +41,7 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+       
         switch (state)
         {
             case State.Walk:
@@ -77,6 +78,9 @@ public class PlayerCtrl : MonoBehaviour {
             case State.Attack3:
                 Attacking();
                 break;
+            case State.Hit:
+                Hitting();
+                break;
         }
 
         if(state != nextState)
@@ -102,6 +106,9 @@ public class PlayerCtrl : MonoBehaviour {
                 case State.Died:
                     Died();
                     break;
+                case State.Hit:
+                    HitStart();
+                    break;
             }
         }
 	}
@@ -111,6 +118,7 @@ public class PlayerCtrl : MonoBehaviour {
         this.nextState = nextState;
     }
 
+    // walk
     void WalkStart()
     {
         StateStartCommon();
@@ -129,6 +137,7 @@ public class PlayerCtrl : MonoBehaviour {
         characterMove.SetDestination(transform.position + (movementHorizon + movementVertical) * speed * Time.deltaTime);
     }
 
+    // basic attack
     void AttackStart(int type)
     {
         StateStartCommon();
@@ -151,7 +160,6 @@ public class PlayerCtrl : MonoBehaviour {
             status.basicAttack3 = true;
         }
         
-
         characterMove.StopMove();
     }
 
@@ -167,11 +175,14 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
 
+    // died
     void Died()
     {
+        characterMove.enabled = false;
         status.died = true;
     }
 
+    // tumbling
     public void TumbleStart()
     {
         StateStartCommon();
@@ -194,8 +205,6 @@ public class PlayerCtrl : MonoBehaviour {
             characterMove.SetDirection((movementHorizon + movementVertical));
             tumbleDestination = transform.position + (movementHorizon + movementVertical) * tumbleDistance * Time.deltaTime;
         }
-
-        
     }
 
     void Tumbling()
@@ -209,17 +218,68 @@ public class PlayerCtrl : MonoBehaviour {
             status.tumbling = true;
             
             characterMove.SetTumbleDestination(tumbleDestination);
+        }
+    }
+
+    // Hit
+    void HitStart()
+    {
+        StateStartCommon();
+        characterMove.enabled = false;
+    }
+    void Hitting()
+    {
+        
+        if (charaAnimation.IsHitted())
+        {
+            characterMove.enabled = true;
+            status.knockDown = false;
+            status.hit = false;
+            immortal = false;
+            ChangeState(State.Walk);
             
         }
     }
 
-    void HitDamage(int attackPower)
+    // damage 
+    void HitDamage(EnemyAttackArea.AttackInfo attackInfo)
     {
-        status.HP -= attackPower;
-        if (status.HP <= 0)
+        if (!immortal)
         {
-            status.HP = 0;
-            ChangeState(State.Died);
+            // shout
+            if(attackInfo.attackPower != 0)
+            {
+                shoutDamageTrigger = false;
+            }
+            if (shoutDamageTrigger)
+            {
+                return;
+            }
+            if(attackInfo.attackPower == 0)
+            {
+                shoutDamageTrigger = true;
+            }
+            status.HP -= attackInfo.attackPower;
+            if (status.HP <= 0)
+            {
+                status.HP = 0;
+                ChangeState(State.Died);
+            }
+            else
+            {
+                if (attackInfo.attackPower > status.MaxHP * 0.2f)
+                {
+                    status.knockDown = true;
+                }
+                else
+                {
+                    status.hit = true;
+                }
+                immortal = true;
+                
+                transform.LookAt( attackInfo.hitDirection);
+                ChangeState(State.Hit);
+            }
         }
     }
 
@@ -230,5 +290,6 @@ public class PlayerCtrl : MonoBehaviour {
         status.basicAttack3 = false;
         status.died = false;
         status.tumbling = false;
+       
     }
 }

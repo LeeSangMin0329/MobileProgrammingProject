@@ -14,7 +14,7 @@ public class CharacterMove : MonoBehaviour {
 
     bool arrived = false;
     bool useGravity = true;
-
+   
     // forced move
     bool forceRotate = false;
     Vector3 forceRotateDirection;
@@ -39,6 +39,7 @@ public class CharacterMove : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        
 
         if (useGravity)
         {

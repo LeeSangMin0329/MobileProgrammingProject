@@ -47,9 +47,12 @@ public class AttackArea : MonoBehaviour {
     // @override
     void OnTriggerEnter(Collider other)
     {
-        GetAttackInfo();
-        other.transform.root.SendMessage("Damage", attackInfo);
-        status.lastAttackTarget = other.transform.root.gameObject;
+        if(other.transform.tag == "Enemy")
+        {
+            GetAttackInfo();
+            other.transform.root.SendMessage("Damage", attackInfo);
+            status.lastAttackTarget = other.transform.root.gameObject;
+        }
     }
 
     public void OnAttack(int attackPower)

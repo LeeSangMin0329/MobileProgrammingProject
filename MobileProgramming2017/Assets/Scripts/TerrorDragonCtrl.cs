@@ -244,7 +244,11 @@ public class TerrorDragonCtrl : MonoBehaviour {
     }
     void Chasing()
     {
-        if (Vector3.Distance(attackTarget.position, transform.position) <= stopDistanceTargetToOwn)
+        Vector3 targetPos = attackTarget.position;
+        Vector3 Pos = transform.position;
+        targetPos.y = 0;
+        Pos.y = 0;
+        if (Vector3.Distance(targetPos, Pos) <= stopDistanceTargetToOwn)
         {
             characterMove.StopMove();
             if (status.flighting)
@@ -380,7 +384,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         StateStartCommon();
         status.flighting = false;
-       
+        characterMove.StopMove();
     }
     void FlightDown()
     {

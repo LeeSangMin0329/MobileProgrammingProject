@@ -22,6 +22,8 @@ public class CharacterStatus : MonoBehaviour {
     public bool basicAttack3 = false;
     public bool tumbling = false;
     public bool died = false;
+    public bool knockDown = false;
+    public bool hit = false;
 
     public bool uncontrollableMotion = true;
 
