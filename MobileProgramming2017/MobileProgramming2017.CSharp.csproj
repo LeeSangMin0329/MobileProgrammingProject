@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\TerrorDragonStatus.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\3D Assets\Terrain\Shadowball Games\Fantasy Tavern Pack\Asset Pack Readme.txt" />
     <None Include="Assets\Effect\PyroParticles\Prefab\Materials\AdditiveTintable.shader" />
     <None Include="Assets\Effect\PyroParticles\Readme.txt" />
   </ItemGroup>

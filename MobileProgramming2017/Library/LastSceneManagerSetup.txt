@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Hunt00.unity
+- path: Assets/Scenes/BaseCamp.unity
   isLoaded: 1
   isActive: 1

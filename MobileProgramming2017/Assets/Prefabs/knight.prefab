@@ -135,13 +135,12 @@ GameObject:
   - component: {fileID: 114654973961937580}
   - component: {fileID: 114196723968486846}
   - component: {fileID: 114137525509103618}
-  - component: {fileID: 114721806291408822}
   - component: {fileID: 114410384723627620}
   - component: {fileID: 23626596381902354}
   - component: {fileID: 143932945048031986}
   m_Layer: 0
   m_Name: knight
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,9 +186,10 @@ GameObject:
   - component: {fileID: 65192515001386514}
   - component: {fileID: 54390281996291950}
   - component: {fileID: 114820424059634020}
+  - component: {fileID: 114645649309743022}
   m_Layer: 10
   m_Name: hipcontrol
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3805,16 +3805,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5af31fb705cb744974f4c268bee864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  MaxHP: 100
+  HP: 1000
+  MaxHP: 1000
   Power: 10
   lastAttackTarget: {fileID: 0}
   characterName: Player
+  attack1Power: 30
+  attack2Power: 50
+  attack3Power: 50
   basicAttack1: 0
   basicAttack2: 0
   basicAttack3: 0
   tumbling: 0
   died: 0
+  knockDown: 0
+  hit: 0
+  skill111: 0
+  skill123: 0
   uncontrollableMotion: 1
 --- !u!114 &114487284605804656
 MonoBehaviour:
@@ -3843,12 +3850,30 @@ MonoBehaviour:
   Power: 10
   lastAttackTarget: {fileID: 0}
   characterName: Player
+  attack1Power: 30
+  attack2Power: 50
+  attack3Power: 50
   basicAttack1: 0
   basicAttack2: 0
   basicAttack3: 0
   tumbling: 0
   died: 0
+  knockDown: 0
+  hit: 0
+  skill111: 0
+  skill123: 0
   uncontrollableMotion: 1
+--- !u!114 &114645649309743022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090856454816814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe64b0a5b937354782c7053c5f8c418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114654973961937580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3866,17 +3891,6 @@ MonoBehaviour:
   walkSpeed: 6
   tumbleSpeed: 10
   rotationSpeed: 360
---- !u!114 &114721806291408822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069293024921374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f073a91637928154aadf3dd35a620f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114820424059634020
 MonoBehaviour:
   m_ObjectHideFlags: 1
