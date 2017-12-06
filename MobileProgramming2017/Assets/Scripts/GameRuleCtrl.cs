@@ -10,13 +10,27 @@ public class GameRuleCtrl : MonoBehaviour {
 
     public float sceneChangeTime = 3.0f;
 
+    public GameObject player;
+    public GameObject playerPrefab;
+    public Transform startPoint;
+    public FollowCamera followCamera;
+
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+        // player character create
+        if (player == null && (Network.isServer || Network.isClient))
+        {
+            // position divide
+            Vector3 shiftVector = new Vector3(Network.connections.Length * 1.5f, 0, 0);
+            player = Network.Instantiate(playerPrefab, startPoint.position + shiftVector, startPoint.rotation, 0) as GameObject;
+            followCamera.SetTarget(player.transform);
+            player.GetComponent<PlayerCtrl>().SetCamera(followCamera.GetComponent<Camera>());
+        }
 
         if(gameOver || gameClear)
         {

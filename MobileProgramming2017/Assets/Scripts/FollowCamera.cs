@@ -8,14 +8,20 @@ public class FollowCamera : MonoBehaviour {
     public float horizontalAngle = 0.0f;
     public float rotAngle = 180.0f;
     public float verticalAngle = 10.0f;
-    public Transform lookTarget;
+    public float cameraFix = 1.0f;
+    public Transform lookTarget = null;
     public Vector3 offset = Vector3.zero;
+
+    Vector3 lookPosition;
+    Vector3 relativePos;
+    Vector3 dir;
 
     InputManager inputManager;
 
 	// Use this for initialization
 	void Start () {
         inputManager = FindObjectOfType<InputManager>();
+        
 	}
 	
 	// Update is called once per frame
@@ -32,8 +38,8 @@ public class FollowCamera : MonoBehaviour {
 
         if(lookTarget != null)
         {
-            Vector3 lookPosition = lookTarget.position + offset;
-            Vector3 relativePos = Quaternion.Euler(verticalAngle, horizontalAngle, 0) *
+            lookPosition = lookTarget.position + offset;
+            relativePos = Quaternion.Euler(verticalAngle, horizontalAngle, 0) *
                 new Vector3(0, 0, -distance);
 
             transform.position = lookPosition + relativePos;
@@ -44,7 +50,18 @@ public class FollowCamera : MonoBehaviour {
             if (Physics.Linecast(lookPosition, transform.position, out hitInfo, 1 << LayerMask.NameToLayer("Ground")))
             {
                 transform.position = hitInfo.point;
+                if(cameraFix > 0)
+                {
+                    transform.Translate(dir * cameraFix);
+                }
             }
         }
 	}
+
+    public void SetTarget(Transform target)
+    {
+        lookTarget = target;
+        dir = (lookTarget.position + offset) - transform.position;
+        dir.Normalize();
+    }
 }

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerCtrl : MonoBehaviour {
+public class PlayerCtrl : NetworkBehaviour {
 
     InputManager inputManager;
     CharacterMove characterMove;
+   
 
     public Vector3 movementHorizon;
     public Vector3 movementVertical;
@@ -34,11 +36,11 @@ public class PlayerCtrl : MonoBehaviour {
     CharaAnimation charaAnimation;
     Transform attackTarget;
     
-
     // Use this for initialization
     void Start () {
         inputManager = FindObjectOfType<InputManager>();
         characterMove = GetComponent<CharacterMove>();
+        
         tumbleDestination = Vector3.zero;
 
         status = GetComponent<CharacterStatus>();
@@ -46,8 +48,14 @@ public class PlayerCtrl : MonoBehaviour {
         skill = new int[3];
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
+        // network
+        if(isLocalPlayer)
+        {
+            return;
+        }
        
         switch (state)
         {
@@ -373,5 +381,28 @@ public class PlayerCtrl : MonoBehaviour {
         status.died = false;
         status.tumbling = false;
        
+    }
+
+    // external part, not game logic
+    public void SetCamera(Camera mainCamera)
+    {
+        charactorCamera = mainCamera;
+    }
+
+    // @override
+    void OnNetworkInstantiate(NetworkMessageInfo info)
+    {
+        if (isLocalPlayer)
+        {
+            CharacterMove move = GetComponent<CharacterMove>();
+            Destroy(move);
+
+            AttackArea[] attackAreas = GetComponentsInChildren<AttackArea>();
+            foreach(AttackArea attackArea in attackAreas)
+            {
+                Destroy(attackArea);
+            }
+            
+        }
     }
 }
