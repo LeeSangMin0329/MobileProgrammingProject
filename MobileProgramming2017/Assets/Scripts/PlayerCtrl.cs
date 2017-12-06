@@ -19,9 +19,15 @@ public class PlayerCtrl : MonoBehaviour {
     bool immortal = false;
     bool shoutDamageTrigger = false;
     
-    enum State { Walk, Tumble, Attack1, Attack2, Attack3, Died, Hit,};
+    enum State { Walk, Tumble, Attack1, Attack2, Attack3, Died, Hit, Skill,};
     State state = State.Walk;
     State nextState = State.Walk;
+
+    // skill system
+    int skillID;
+    int skillCount = 0;
+    bool skillEnable = false;
+    int[] skill;
 
     //const float RayCastMaxDistance = 100.0f;
     CharacterStatus status;
@@ -37,6 +43,7 @@ public class PlayerCtrl : MonoBehaviour {
 
         status = GetComponent<CharacterStatus>();
         charaAnimation = GetComponent<CharaAnimation>();
+        skill = new int[3];
 	}
 	
 	// Update is called once per frame
@@ -46,21 +53,49 @@ public class PlayerCtrl : MonoBehaviour {
         {
             case State.Walk:
                 // branch trigger # critical ordering
+                if(skillCount == 3)
+                {
+                    skillEnable = false;
+                    ChangeState(State.Skill);
+                }
+
                 if (inputManager.basicAttackTrigger1)
                 {
+                    if (skillEnable)
+                    {
+                        skill[skillCount++] = 1;
+                    }
                     ChangeState(State.Attack1);
                 }
                 else if (inputManager.basicAttackTrigger2)
                 {
+                    if (skillEnable)
+                    {
+                        skill[skillCount++] = 2;
+                    }
                     ChangeState(State.Attack2);
                 }
                 else if (inputManager.basicAttackTrigger3)
                 {
+                    if (skillEnable)
+                    {
+                        skill[skillCount++] = 3;
+                    }
                     ChangeState(State.Attack3);
                 }
                 if (inputManager.tumbleTrigger)
                 {
                     ChangeState(State.Tumble);
+                }
+
+                if (skillEnable && inputManager.skillTrigger)
+                {
+                    skillEnable = false;
+                    ChangeState(State.Skill);
+                }
+                else if(inputManager.skillTrigger)
+                {
+                    skillEnable = true;
                 }
                 // ~trigger ctrl
                 
@@ -80,6 +115,9 @@ public class PlayerCtrl : MonoBehaviour {
                 break;
             case State.Hit:
                 Hitting();
+                break;
+            case State.Skill:
+                SkillFire();
                 break;
         }
 
@@ -108,6 +146,9 @@ public class PlayerCtrl : MonoBehaviour {
                     break;
                 case State.Hit:
                     HitStart();
+                    break;
+                case State.Skill:
+                    SkillStart();
                     break;
             }
         }
@@ -159,7 +200,7 @@ public class PlayerCtrl : MonoBehaviour {
             status.basicAttack2 = false;
             status.basicAttack3 = true;
         }
-        
+
         characterMove.StopMove();
     }
 
@@ -169,7 +210,7 @@ public class PlayerCtrl : MonoBehaviour {
         {
             ChangeState(State.Walk);
         }
-        else if (status.uncontrollableMotion == false && inputManager.tumbleTrigger)
+        else if (!skillEnable && status.uncontrollableMotion == false && inputManager.tumbleTrigger)
         {
             ChangeState(State.Tumble);
         }
@@ -238,6 +279,47 @@ public class PlayerCtrl : MonoBehaviour {
             immortal = false;
             ChangeState(State.Walk);
             
+        }
+    }
+
+    // Skill
+    void SkillStart()
+    {
+        StateStartCommon();
+        characterMove.StopMove();
+        skillID = (int)skill[0];
+        skillID *= 10;
+        skillID += (int)skill[1];
+        skillID *= 10;
+        skillID += (int)skill[2];
+        
+        if (skillCount != 3)
+        {
+            // skill fail
+        }
+        else
+        {
+
+            switch (skillID)
+            {
+                case 111:
+                    status.skill111 = true;
+                    break;
+                case 123:
+                    status.skill123 = true;
+                    break;
+                default:
+                    // skill fail
+                    break;
+            }
+        }
+        skillCount = 0;
+    }
+    void SkillFire()
+    {
+        if (charaAnimation.IsSkillEnd())
+        {
+            ChangeState(State.Walk);
         }
     }
 

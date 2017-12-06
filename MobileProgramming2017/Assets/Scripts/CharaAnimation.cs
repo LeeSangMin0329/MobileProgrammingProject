@@ -19,6 +19,10 @@ public class CharaAnimation : MonoBehaviour {
     bool hitTrigger = false;
 
     bool tumbled = false;
+
+    // skill
+    bool skill111 = false;
+    bool skill123 = false;
     
 
     // propertiy
@@ -34,6 +38,10 @@ public class CharaAnimation : MonoBehaviour {
     public bool IsHitted()
     {
         return (hit || knockDown);
+    }
+    public bool IsSkillEnd()
+    {
+        return skill111 || skill123;
     }
 
     // animation event handling
@@ -163,6 +171,16 @@ public class CharaAnimation : MonoBehaviour {
         hit = true;
     }
 
+    // skill id 111
+    void EndSkill111()
+    {
+        skill111 = true;
+    }
+    // skill id 123
+    void EndSkill123()
+    {
+        skill123 = true;
+    }
     // ~animation event handling
 
     // Use this for initialization
@@ -230,6 +248,19 @@ public class CharaAnimation : MonoBehaviour {
             hitTrigger = false;
         }
         animator.SetBool("Hit", (!hitTrigger && status.hit));
+
+        // skill
+        if(skill111 && !status.skill111)
+        {
+            skill111 = false;
+        }
+        animator.SetBool("Skill111", !skill111 && status.skill111);
+
+        if(skill123 && !status.skill123)
+        {
+            skill123 = false;
+        }
+        animator.SetBool("Skill123", !skill123 && status.skill123);
         
         // Died
         if (!isDown && status.died)

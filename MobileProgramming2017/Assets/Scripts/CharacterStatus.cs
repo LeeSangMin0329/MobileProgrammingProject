@@ -24,6 +24,8 @@ public class CharacterStatus : MonoBehaviour {
     public bool died = false;
     public bool knockDown = false;
     public bool hit = false;
+    public bool skill111 = false;
+    public bool skill123 = false;
 
     public bool uncontrollableMotion = true;
 

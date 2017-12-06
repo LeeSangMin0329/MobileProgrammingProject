@@ -19,6 +19,8 @@ public class InputManager : MonoBehaviour {
     public bool basicAttackTrigger1 = false;
     public bool basicAttackTrigger2 = false;
     public bool basicAttackTrigger3 = false;
+
+    public bool skillTrigger = false;
 	
 	// Update is called once per frame
 	void Update () {
@@ -91,6 +93,15 @@ public class InputManager : MonoBehaviour {
         else
         {
             basicAttackTrigger3 = false;
+        }
+
+        if (Input.GetButtonDown("Skill"))
+        {
+            skillTrigger = true;
+        }
+        else
+        {
+            skillTrigger = false;
         }
     }
 

@@ -856,7 +856,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 1, z: 4}
+  m_Size: {x: 5, y: 7, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &112734283
 MonoBehaviour:
@@ -3462,6 +3462,7 @@ MonoBehaviour:
   basicAttackTrigger1: 0
   basicAttackTrigger2: 0
   basicAttackTrigger3: 0
+  skillTrigger: 0
 --- !u!1 &803846010
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,6 +3737,8 @@ MonoBehaviour:
   died: 0
   knockDown: 0
   hit: 0
+  skill111: 0
+  skill123: 0
   uncontrollableMotion: 1
 --- !u!114 &841047060
 MonoBehaviour:
@@ -4635,6 +4638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1080854716}
   - component: {fileID: 1080854718}
+  - component: {fileID: 1080854720}
   - component: {fileID: 1080854717}
   - component: {fileID: 1080854719}
   m_Layer: 9
@@ -4701,6 +4705,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 250
+--- !u!114 &1080854720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1080854715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca31b5eae9fdcf468c8c62dbe57f1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1109774560
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,7 +5321,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19891030, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: randomSeed
-      value: 1131177988
+      value: 1366096648
       objectReference: {fileID: 0}
     - target: {fileID: 19810244, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: playOnAwake
@@ -5354,7 +5369,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437028, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 437028, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: m_LocalScale.z
@@ -5366,7 +5381,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464710, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 163286, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: m_Layer
@@ -5383,6 +5398,10 @@ Prefab:
     - target: {fileID: 163286, guid: 50daa816369323b42b56093bb108296f, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19891030, guid: 50daa816369323b42b56093bb108296f, type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11498850, guid: 50daa816369323b42b56093bb108296f, type: 2}
@@ -7248,6 +7267,8 @@ MonoBehaviour:
   died: 0
   knockDown: 0
   hit: 0
+  skill111: 0
+  skill123: 0
   uncontrollableMotion: 1
 --- !u!114 &1737419606
 MonoBehaviour:

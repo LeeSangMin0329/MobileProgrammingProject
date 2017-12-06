@@ -455,5 +455,4 @@ public class TerrorDragonCtrl : MonoBehaviour {
         status.flightRush = false;
         status.flightFire = false;
     }
-
 }

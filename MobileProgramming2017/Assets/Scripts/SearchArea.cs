@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SearchArea : MonoBehaviour {
 
-    EnemyCtrl enemyCtrl;
+    TerrorDragonCtrl enemyCtrl;
 
     // @override collider
     void OnTriggerStay(Collider other)
@@ -17,7 +17,7 @@ public class SearchArea : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        enemyCtrl = transform.root.GetComponent<EnemyCtrl>();
+        enemyCtrl = transform.root.GetComponent<TerrorDragonCtrl>();
 	}
 	
 	// Update is called once per frame
