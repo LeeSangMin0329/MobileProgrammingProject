@@ -36,11 +36,16 @@ public class PlayerCtrl : MonoBehaviour {
     CharaAnimation charaAnimation;
     Transform attackTarget;
     
+    void Awake()
+    {
+        netView = GetComponent<NetworkView>();
+    }
+
     // Use this for initialization
     void Start () {
         inputManager = FindObjectOfType<InputManager>();
         characterMove = GetComponent<CharacterMove>();
-        netView = GetComponent<NetworkView>();
+        
         
         tumbleDestination = Vector3.zero;
 

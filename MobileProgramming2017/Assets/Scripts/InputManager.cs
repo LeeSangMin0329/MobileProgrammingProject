@@ -22,10 +22,11 @@ public class InputManager : NetworkBehaviour {
     public bool basicAttackTrigger3 = false;
 
     public bool skillTrigger = false;
-	
+
     
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
         // wasd
         horizontalMove = Input.GetAxisRaw("Horizontal");
@@ -135,4 +136,5 @@ public class InputManager : NetworkBehaviour {
     {
         return Input.mousePosition;
     }
+    
 }

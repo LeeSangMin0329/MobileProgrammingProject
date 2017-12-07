@@ -15,9 +15,20 @@ public class GameRuleCtrl : MonoBehaviour {
     public Transform startPoint;
     public FollowCamera followCamera;
 
+    public int userCount = 0;
+
+    NetworkView netView;
+
+    [RPC]
+    void IncreaceUserCount()
+    {
+        userCount++;
+        Debug.Log(userCount);
+    }
+
 	// Use this for initialization
 	void Start () {
-		
+        netView = GetComponent<NetworkView>();
 	}
 
     // Update is called once per frame
@@ -30,6 +41,11 @@ public class GameRuleCtrl : MonoBehaviour {
             player = Network.Instantiate(playerPrefab, startPoint.position + shiftVector, startPoint.rotation, 0) as GameObject;
             followCamera.SetTarget(player.transform);
             player.GetComponent<PlayerCtrl>().SetCamera(followCamera.GetComponent<Camera>());
+            netView.RPC("IncreaceUserCount", RPCMode.Server);
+            if (Network.isServer)
+            {
+                IncreaceUserCount();
+            }
         }
 
         if(gameOver || gameClear)

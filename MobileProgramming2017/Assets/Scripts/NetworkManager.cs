@@ -14,6 +14,12 @@ public class NetworkManager : MonoBehaviour {
     string playerName;
     string gameServerName;
 
+    // @override
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
 	// Use this for initialization
 	void Start () {
         playerName = "Player" + Random.Range(0, 99999999).ToString();
