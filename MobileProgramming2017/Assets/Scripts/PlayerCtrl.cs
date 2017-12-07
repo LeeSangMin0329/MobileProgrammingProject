@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class PlayerCtrl : NetworkBehaviour {
+public class PlayerCtrl : MonoBehaviour {
 
     InputManager inputManager;
     CharacterMove characterMove;
-   
 
+    NetworkView netView;
+    
     public Vector3 movementHorizon;
     public Vector3 movementVertical;
     public Vector3 tumbleDestination;
@@ -40,6 +40,7 @@ public class PlayerCtrl : NetworkBehaviour {
     void Start () {
         inputManager = FindObjectOfType<InputManager>();
         characterMove = GetComponent<CharacterMove>();
+        netView = GetComponent<NetworkView>();
         
         tumbleDestination = Vector3.zero;
 
@@ -48,11 +49,10 @@ public class PlayerCtrl : NetworkBehaviour {
         skill = new int[3];
 	}
 	
-
+    
 	// Update is called once per frame
 	void Update () {
-        // network
-        if(isLocalPlayer)
+        if (netView.enabled && !netView.isMine)
         {
             return;
         }
@@ -392,10 +392,9 @@ public class PlayerCtrl : NetworkBehaviour {
     // @override
     void OnNetworkInstantiate(NetworkMessageInfo info)
     {
-        if (isLocalPlayer)
+        if (!netView.isMine)
         {
-            CharacterMove move = GetComponent<CharacterMove>();
-            Destroy(move);
+            Destroy(characterMove);
 
             AttackArea[] attackAreas = GetComponentsInChildren<AttackArea>();
             foreach(AttackArea attackArea in attackAreas)

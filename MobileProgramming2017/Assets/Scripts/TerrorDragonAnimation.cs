@@ -38,6 +38,7 @@ public class TerrorDragonAnimation : MonoBehaviour {
 
 
     public GameObject fireEffect;
+    public GameObject shoutEffect;
 
     // property
 
@@ -76,6 +77,10 @@ public class TerrorDragonAnimation : MonoBehaviour {
     {
         shoutArea.SetAttackPower(0);
         shoutArea.OnAttack();
+        if (shoutEffect)
+        {
+            shoutEffect.SetActive(true);
+        }
     }
     void EndShoutHit()
     {
@@ -84,6 +89,10 @@ public class TerrorDragonAnimation : MonoBehaviour {
     void EndShout()
     {
         shout = true;
+        if (shoutEffect)
+        {
+            shoutEffect.SetActive(false);
+        }
     }
 
     //bite

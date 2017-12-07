@@ -108,8 +108,7 @@ GameObject:
   - component: {fileID: 114410384723627620}
   - component: {fileID: 23626596381902354}
   - component: {fileID: 143932945048031986}
-  - component: {fileID: 114749667413605688}
-  - component: {fileID: 114074524251978282}
+  - component: {fileID: 148746676104513842}
   m_Layer: 0
   m_Name: knight
   m_TagString: Untagged
@@ -1431,8 +1430,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069293024921374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.05091, y: 0, z: -36.028725}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -6.89, y: -2.37, z: -13.03}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4449944673639270}
   - {fileID: 4460855257969298}
@@ -2809,27 +2808,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114074524251978282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069293024921374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 4
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114137525509103618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2926,38 +2904,6 @@ MonoBehaviour:
   walkSpeed: 6
   tumbleSpeed: 10
   rotationSpeed: 360
---- !u!114 &114749667413605688
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069293024921374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 128
-    i1: 58
-    i2: 138
-    i3: 105
-    i4: 0
-    i5: 222
-    i6: 164
-    i7: 164
-    i8: 123
-    i9: 183
-    i10: 7
-    i11: 127
-    i12: 98
-    i13: 154
-    i14: 252
-    i15: 45
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114820424059634020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3148,8 +3094,20 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 5
-  m_StepOffset: 0.01
+  m_SlopeLimit: 20
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!148 &148746676104513842
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069293024921374}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 4081546732894262}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0

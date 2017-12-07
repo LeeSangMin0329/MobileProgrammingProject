@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class InputManager : MonoBehaviour {
+public class InputManager : NetworkBehaviour {
 
     // slide variable
     Vector2 slideStartPosition;
@@ -22,6 +23,7 @@ public class InputManager : MonoBehaviour {
 
     public bool skillTrigger = false;
 	
+    
 	// Update is called once per frame
 	void Update () {
 

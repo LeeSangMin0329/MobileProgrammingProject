@@ -111,6 +111,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkManager
 3577ee9db3324364d451252c229c2a15 Assembly-CSharp.dll:.FollowCamera
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AttackAreaActivator
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireBaseScript
@@ -155,4 +156,3 @@ b2c92712d470dca5a4fa2c6f16be4198 Assembly-CSharp.dll:.MaterialChange
 7dc8966817ca3bb6f191744aabfd4d41 Assembly-CSharp.dll:.CharacterStatus
 f6aa4e8af0396e6166518d80526eee68 Assembly-CSharp.dll:.TerrorDragonStatus
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HitArea
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkManager
