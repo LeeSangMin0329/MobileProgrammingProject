@@ -94,8 +94,10 @@
     <Compile Include="Assets\Scripts\CharaAnimation.cs" />
     <Compile Include="Assets\Scripts\CharacterMove.cs" />
     <Compile Include="Assets\Scripts\CharacterStatus.cs" />
+    <Compile Include="Assets\Scripts\CharaSynchronizer.cs" />
     <Compile Include="Assets\Scripts\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\EnemyCtrl.cs" />
+    <Compile Include="Assets\Scripts\EntranceEvent.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\GameRuleCtrl.cs" />
     <Compile Include="Assets\Scripts\HitArea.cs" />

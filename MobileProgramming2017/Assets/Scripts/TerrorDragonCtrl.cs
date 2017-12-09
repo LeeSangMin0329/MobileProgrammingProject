@@ -27,6 +27,8 @@ public class TerrorDragonCtrl : MonoBehaviour {
 
     //effect
     public GameObject hitEffect;
+    public GameObject rightWingFireEffect;
+    public GameObject leftWingFireEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -226,13 +228,32 @@ public class TerrorDragonCtrl : MonoBehaviour {
         if (status.flighting)
         {
             status.flightRush = true;
+            if (rightWingFireEffect)
+            {
+                rightWingFireEffect.SetActive(true);
+            }
+            if (leftWingFireEffect)
+            {
+                leftWingFireEffect.SetActive(true);
+            }
         }
     }
     void Running()
     {
         if (characterMove.Arrived())
         {
-            ChangeState(State.Chasing);
+            ChangeState(State.Walk);
+            if (status.flighting)
+            {
+                if (rightWingFireEffect)
+                {
+                    rightWingFireEffect.SetActive(false);
+                }
+                if (leftWingFireEffect)
+                {
+                    leftWingFireEffect.SetActive(false);
+                }
+            }
         }
     }
 

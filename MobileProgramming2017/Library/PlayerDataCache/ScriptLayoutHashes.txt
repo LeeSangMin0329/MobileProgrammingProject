@@ -104,6 +104,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntranceEvent
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BaseCampInteraction
 34cc888a35f550e5f6d40b4f0d846418 Assembly-CSharp.dll:DigitalRuby.PyroParticles.MeteorSwarmScript
 e8aeaa86d7c4f4106f09dcc82eeac862 Assembly-CSharp.dll:.PlayerCtrl
@@ -157,7 +158,6 @@ bf9a2d9672e74ed3e445e71a1d646ef5 Assembly-CSharp.dll:.TerrorDragonAnimation
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireConstantBaseScript
 2b0d1bf7df1dadb2f1fa8efa0efe11fa Assembly-UnityScript.dll:.ConGUI
 7dc8966817ca3bb6f191744aabfd4d41 Assembly-CSharp.dll:.CharacterStatus
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CharaSynchronizer
 f6aa4e8af0396e6166518d80526eee68 Assembly-CSharp.dll:.TerrorDragonStatus
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HitArea
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CharaSynchronizer
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntranceEvent

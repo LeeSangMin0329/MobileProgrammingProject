@@ -23,6 +23,7 @@ public class TerrorDragonAnimation : MonoBehaviour {
     public EnemyAttackArea neck;
 
     public EnemyAttackArea shoutArea;
+    public EnemyAttackArea flightRushArea;
     
 
 
@@ -247,6 +248,15 @@ public class TerrorDragonAnimation : MonoBehaviour {
 
         // flight rush
         animator.SetBool("FlightRush", status.flightRush);
+        if (status.flightRush)
+        {
+            flightRushArea.SetAttackPower(400);
+            flightRushArea.OnAttack();
+        }
+        else
+        {
+            flightRushArea.OnAttackTermination();
+        }
 
         // flight fire
         if(flightFire && !status.flightFire)
