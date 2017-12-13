@@ -234,6 +234,14 @@ public class PlayerCtrl : MonoBehaviour {
     {
         characterMove.enabled = false;
         status.died = true;
+        Invoke("DelayedDestroy", 8.0f);
+    }
+
+    void DelayedDestroy()
+    {
+        Network.Destroy(gameObject);
+        Network.RemoveRPCs(netView.viewID);
+        netView = null;
     }
 
     // tumbling
@@ -339,10 +347,23 @@ public class PlayerCtrl : MonoBehaviour {
     // damage 
     void HitDamage(EnemyAttackArea.AttackInfo attackInfo)
     {
+        if (netView.isMine)
+        {
+            DamageMine(attackInfo.attackPower, attackInfo.hitDirection);
+        }
+        else
+        {
+            netView.RPC("DamageMine", netView.owner, attackInfo.attackPower, attackInfo.hitDirection);
+        }
+    }
+
+    [RPC]
+    void DamageMine(int attackPower, Vector3 hitDirection)
+    {
         if (!immortal)
         {
             // shout
-            if(attackInfo.attackPower != 0)
+            if (attackPower != 0)
             {
                 shoutDamageTrigger = false;
             }
@@ -350,11 +371,11 @@ public class PlayerCtrl : MonoBehaviour {
             {
                 return;
             }
-            if(attackInfo.attackPower == 0)
+            if (attackPower == 0)
             {
                 shoutDamageTrigger = true;
             }
-            status.HP -= attackInfo.attackPower;
+            status.HP -= attackPower;
             if (status.HP <= 0)
             {
                 status.HP = 0;
@@ -362,7 +383,7 @@ public class PlayerCtrl : MonoBehaviour {
             }
             else
             {
-                if (attackInfo.attackPower > status.MaxHP * 0.2f)
+                if (attackPower > status.MaxHP * 0.2f)
                 {
                     status.knockDown = true;
                 }
@@ -371,8 +392,8 @@ public class PlayerCtrl : MonoBehaviour {
                     status.hit = true;
                 }
                 immortal = true;
-                
-                transform.LookAt( attackInfo.hitDirection);
+
+                transform.LookAt(hitDirection);
                 ChangeState(State.Hit);
             }
         }

@@ -15,19 +15,11 @@ public class GameRuleCtrl : MonoBehaviour {
     public Transform startPoint;
     public FollowCamera followCamera;
 
-    public int userCount = 0;
-
     NetworkView netView;
 
-    [RPC]
-    void IncreaceUserCount()
-    {
-        userCount++;
-        Debug.Log(userCount);
-    }
-
-	// Use this for initialization
-	void Start () {
+    
+    // Use this for initialization
+    void Start () {
         netView = GetComponent<NetworkView>();
 	}
 
@@ -41,11 +33,10 @@ public class GameRuleCtrl : MonoBehaviour {
             player = Network.Instantiate(playerPrefab, startPoint.position + shiftVector, startPoint.rotation, 0) as GameObject;
             followCamera.SetTarget(player.transform);
             player.GetComponent<PlayerCtrl>().SetCamera(followCamera.GetComponent<Camera>());
-            netView.RPC("IncreaceUserCount", RPCMode.Server);
-            if (Network.isServer)
-            {
-                IncreaceUserCount();
-            }
+
+            NetworkManager networkManager = FindObjectOfType(typeof(NetworkManager)) as NetworkManager;
+            player.GetComponent<NetworkView>().RPC("SetName", RPCMode.AllBuffered, networkManager.GetPlayerName());
+
         }
 
         if(gameOver || gameClear)
@@ -54,20 +45,33 @@ public class GameRuleCtrl : MonoBehaviour {
             if(sceneChangeTime <= 0.0f)
             {
                 // time out game over
-                UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("BaseCamp");
             }
             return;
         }
 
-        timeRemaining -= Time.deltaTime;
-
-        if(timeRemaining <= 0.0f)
+        if((Network.isServer || Network.isClient))
         {
-            GameOver();
+            timeRemaining -= Time.deltaTime;
+
+            if (timeRemaining <= 0.0f)
+            {
+                GameOver();
+            }
         }
 	}
 
     public void GameOver()
+    {
+        if(!gameOver && Network.isServer)
+        {
+            netView.RPC("GameOverOnNetwork", RPCMode.AllBuffered);
+        }
+        
+    }
+
+    [RPC]
+    void GameOverOnNetwork()
     {
         gameOver = true;
         Debug.Log("GameOver");
@@ -77,5 +81,19 @@ public class GameRuleCtrl : MonoBehaviour {
     {
         gameClear = true;
         Debug.Log("GameClear");
+    }
+
+    [RPC]
+    void SetRemainTime(float time)
+    {
+        timeRemaining = time;
+    }
+
+
+    // on Server method
+    // when other client access to server
+    void OnPlayerConnected(NetworkPlayer player)
+    {
+        netView.RPC("SetRemainTime", player, timeRemaining);
     }
 }

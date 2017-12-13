@@ -154,7 +154,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4804055451039352}
   - component: {fileID: 114002748374370418}
-  - component: {fileID: 114865572118806904}
   m_Layer: 8
   m_Name: WallOfFire
   m_TagString: Untagged
@@ -317,7 +316,9 @@ GameObject:
   - component: {fileID: 114564015616873342}
   - component: {fileID: 114736024336422666}
   - component: {fileID: 114608030044612120}
+  - component: {fileID: 114532664808786116}
   - component: {fileID: 143011896467773784}
+  - component: {fileID: 148656041930560452}
   m_Layer: 0
   m_Name: GreyDragon
   m_TagString: Untagged
@@ -1032,7 +1033,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4053450467805310}
   - component: {fileID: 114648032720187510}
-  - component: {fileID: 114747179459869978}
   m_Layer: 8
   m_Name: WallOfFire (1)
   m_TagString: Untagged
@@ -4183,6 +4183,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 250
+--- !u!114 &114532664808786116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157485732203918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b80b4c2b7ac884d9f726c3f534c31d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114564015616873342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4292,6 +4303,8 @@ MonoBehaviour:
   died: 0
   lastAttacker: {fileID: 0}
   HP: 100000
+  MaxHP: 100000
+  enemyName: TerrorDragon
 --- !u!114 &114742139313869510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4304,25 +4317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 250
---- !u!114 &114747179459869978
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1582915501836396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b986ebeafa7e224e810d950d54baf03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AudioSource: {fileID: 82606166085335014}
-  StartTime: 3
-  StopTime: 2
-  Duration: 0
-  ForceAmount: 0
-  ForceRadius: 0
-  IsProjectile: 0
-  ManualParticleSystems: []
 --- !u!114 &114804289327975744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4335,25 +4329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 250
---- !u!114 &114865572118806904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1111086487227168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b986ebeafa7e224e810d950d54baf03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AudioSource: {fileID: 82714446194629502}
-  StartTime: 3
-  StopTime: 2
-  Duration: 0
-  ForceAmount: 0
-  ForceRadius: 0
-  IsProjectile: 0
-  ManualParticleSystems: []
 --- !u!114 &114926137988893884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4725,6 +4700,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!148 &148656041930560452
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157485732203918}
+  m_Enabled: 1
+  m_StateSynchronization: 2
+  m_Observed: {fileID: 114532664808786116}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!198 &198032604947169562
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -14,12 +14,7 @@ public class NetworkManager : MonoBehaviour {
     string playerName;
     string gameServerName;
 
-    // @override
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
-
+    
 	// Use this for initialization
 	void Start () {
         playerName = "Player" + Random.Range(0, 99999999).ToString();
@@ -50,7 +45,13 @@ public class NetworkManager : MonoBehaviour {
         status = Status.LaunchingServer;
         StartCoroutine(LaunchServerCoroutine(gameServerName));
     }
-	
+
+    public void CloseServer()
+    {
+        StopAllCoroutines();
+        UnregisterHost();
+    }
+
     // hole punching
     bool useNat = false;
     IEnumerator CheckNat()
@@ -118,7 +119,7 @@ public class NetworkManager : MonoBehaviour {
     {
         yield return StartCoroutine(CheckNat());
 
-        NetworkConnectionError error = Network.InitializeServer(32, ServerPort, useNat);
+        NetworkConnectionError error = Network.InitializeServer(4, ServerPort, useNat);
         if(error != NetworkConnectionError.NoError)
         {
             Debug.Log("Can't Launch Server");

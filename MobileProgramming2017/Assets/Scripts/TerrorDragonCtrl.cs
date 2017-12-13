@@ -6,8 +6,10 @@ public class TerrorDragonCtrl : MonoBehaviour {
 
     CharacterMove characterMove;
 
+    NetworkView netView;
+
     enum State { Walk, BreathFire, Run, Chasing, Bite, WingStrike, Shout,
-        FlightUp, FlightTurning, FlightRush, FlightDown, Flighting, FlightFire, Died}
+        FlightUp, FlightTurning, FlightRush, FlightDown, Flighting, FlightFire, Died }
     State state = State.Walk;
     State nextState = State.Walk;
 
@@ -30,9 +32,11 @@ public class TerrorDragonCtrl : MonoBehaviour {
     public GameObject rightWingFireEffect;
     public GameObject leftWingFireEffect;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         characterMove = GetComponent<CharacterMove>();
+
+        netView = GetComponent<NetworkView>();
 
         status = GetComponent<TerrorDragonStatus>();
         terrAnimation = GetComponent<TerrorDragonAnimation>();
@@ -40,12 +44,17 @@ public class TerrorDragonCtrl : MonoBehaviour {
         basePosition = transform.position;
         waitTime = waitBaseTime;
         attackTarget = null;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-        switch(state)
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+        if (!netView.isMine)
+        {
+            return;
+        }
+
+        switch (state)
         {
             case State.Walk:
                 Walking();
@@ -89,10 +98,10 @@ public class TerrorDragonCtrl : MonoBehaviour {
                 break;
         }
 
-        if(state != nextState)
+        if (state != nextState)
         {
             state = nextState;
-            switch(state)
+            switch (state)
             {
                 case State.Walk:
                     WalkStart();
@@ -139,7 +148,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
                     break;
             }
         }
-	}
+    }
 
     void WalkStart()
     {
@@ -160,7 +169,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
         }
         else
         {
-            
+
             if (characterMove.Arrived())
             {
                 basePosition = transform.position;
@@ -200,7 +209,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
                         ChangeState(State.Chasing);
                     }
                 }
-                
+
             }
             else
             {
@@ -276,7 +285,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
             {
                 // random flight attack state
                 int randomValue = Random.Range(0, 2);
-                if(randomValue == 0)
+                if (randomValue == 0)
                 {
                     ChangeState(State.Walk);
                 }
@@ -306,7 +315,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
         else if (characterMove.Arrived())
         {
             ChangeState(State.Walk);
-            
+
         }
     }
 
@@ -349,11 +358,11 @@ public class TerrorDragonCtrl : MonoBehaviour {
         StateStartCommon();
         status.shouting = true;
         characterMove.StopMove();
-        
+
     }
     void Shouting()
     {
-        if(terrAnimation.IsShoutEnd())
+        if (terrAnimation.IsShoutEnd())
         {
             // random state
             ChangeState(State.Walk);
@@ -384,7 +393,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         StateStartCommon();
         status.flighting = true;
-       
+
 
     }
     void FlightUP()
@@ -413,10 +422,10 @@ public class TerrorDragonCtrl : MonoBehaviour {
         {
             characterMove.SetControllerOffsetY(1f);
         }
-        
+
         if (terrAnimation.IsFlightDown())
         {
-        //    characterMove.UseGravity(true);
+            //    characterMove.UseGravity(true);
             ChangeState(State.Walk);
         }
     }
@@ -437,6 +446,8 @@ public class TerrorDragonCtrl : MonoBehaviour {
     void Died()
     {
         status.died = true;
+        Network.Destroy(gameObject);
+        Network.RemoveRPCs(netView.viewID);
     }
 
     void Damage(AttackArea.AttackInfo attackInfo)
@@ -448,12 +459,41 @@ public class TerrorDragonCtrl : MonoBehaviour {
             //effect.transform.position = attackInfo.collisionPosition;
             Destroy(effect, 0.3f);
         }
-        status.lastAttacker = attackInfo.attacker;
-        status.HP -= attackInfo.attackPower;
+
+        if (netView.isMine)
+        {
+            DamageMine(attackInfo.attackPower);
+        }
+        else
+        {
+            netView.RPC("DamageMine", netView.owner, attackInfo.attackPower);
+        }
+       
+    }
+
+    [RPC]
+    void DamageMine(int attackPower)
+    {
+        status.HP -= attackPower;
         if (status.HP <= 0)
         {
             status.HP = 0;
             ChangeState(State.Died);
+        }
+    }
+
+    //@override
+    void OnNetworkInstantiate(NetworkMessageInfo info)
+    {
+        if (!netView.isMine)
+        {
+            Destroy(characterMove);
+
+            EnemyAttackArea[] attackAreas = GetComponents<EnemyAttackArea>();
+            foreach(EnemyAttackArea attackArea in attackAreas)
+            {
+                Destroy(attackArea);
+            }
         }
     }
 

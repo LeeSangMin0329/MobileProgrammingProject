@@ -18,8 +18,14 @@ public class FollowCamera : MonoBehaviour {
 
     InputManager inputManager;
 
-	// Use this for initialization
-	void Start () {
+    // shake
+    float shakePower = 2.0f;
+    bool bShake = false;
+    Vector2 shakeCameraPos;
+    Vector3 cameraPos;
+
+    // Use this for initialization
+    void Start () {
         inputManager = FindObjectOfType<InputManager>();
         
 	}
@@ -55,8 +61,33 @@ public class FollowCamera : MonoBehaviour {
                     transform.Translate(dir * cameraFix);
                 }
             }
+
+            // camera shake
+            if (bShake)
+            {
+                cameraPos = transform.position;
+                if (shakePower > 0.0f)
+                {
+                    shakePower -= 5.0f * Time.deltaTime;
+                }
+                else
+                {
+                    bShake = false;
+                    shakePower = 0.0f;
+                }
+                shakeCameraPos = Random.insideUnitCircle * shakePower;
+                cameraPos.y += shakeCameraPos.x;
+                cameraPos.z += shakeCameraPos.y;
+                transform.position = cameraPos;
+            }
         }
 	}
+
+    public void ShakeOn(float power)
+    {
+        bShake = true;
+        shakePower = power;
+    }
 
     public void SetTarget(Transform target)
     {

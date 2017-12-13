@@ -38,4 +38,10 @@ public class CharacterStatus : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    [RPC]
+    public void SetName(string name)
+    {
+        characterName = name;
+    }
 }

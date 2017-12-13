@@ -22,6 +22,9 @@ public class TerrorDragonStatus : MonoBehaviour {
 
     // status
     public int HP = 100000;
+    public int MaxHP = 100000;
+
+    public string enemyName = "TerrorDragon";
 
 	// Use this for initialization
 	void Start () {

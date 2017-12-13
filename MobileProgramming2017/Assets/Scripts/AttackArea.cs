@@ -20,7 +20,7 @@ public class AttackArea : MonoBehaviour {
     
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         status = transform.root.GetComponent<CharacterStatus>();
         ownCollider = transform.GetComponent<Collider>();
