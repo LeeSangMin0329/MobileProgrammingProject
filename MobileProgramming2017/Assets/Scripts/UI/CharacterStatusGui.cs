@@ -22,6 +22,8 @@ public class CharacterStatusGui : MonoBehaviour {
     Rect enemyLifeBarRect = new Rect(0f, 0f, 128f, 24f);
     Color enemyFrontLifeBarColor = Color.red;
 
+    Rect ownHpBarRect = new Rect(0f, 0f, 256f, 16f);
+
     void DrawPlayerStatus()
     {
         float x = baseWidth - playerLifeBarRect.width - playerStatusOffset.x;
@@ -42,7 +44,16 @@ public class CharacterStatusGui : MonoBehaviour {
                 y += deltaHeight;
             }
         }
-        
+        DrawHpBar(
+                    Screen.width * 0.7f, 0,
+                    playerStatus,
+                    ownHpBarRect,
+                    playerFrontLifeBarColor);
+        DrawStaminaBar(
+                    Screen.width * 0.7f, Screen.height * 0.05f,
+                    playerStatus,
+                    ownHpBarRect,
+                    Color.yellow);
     }
 
     void DrawEnemyStatus()
@@ -83,7 +94,48 @@ public class CharacterStatusGui : MonoBehaviour {
             GUI.DrawTexture(new Rect(x + resizeFrontBarOffsetX, y, frontBarWidth * lifeValue, barRect.height), frontLifeBarTexture);
             GUI.color = guiColor;
         }
+    }
+    void DrawHpBar(float x, float y, CharacterStatus status, Rect barRect, Color frontColor)
+    {
+        float lifeValue = (float)status.HP / status.MaxHP;
+        if (backLifeBarTexture != null)
+        {
+            // back bar
+            y += nameRect.height;
+            GUI.DrawTexture(new Rect(x, y, barRect.width, barRect.height), backLifeBarTexture);
+        }
 
+        // front bar
+        if (frontLifeBarTexture != null)
+        {
+            float resizeFrontBarOffsetX = frontLifeBarOffsetX * barRect.width / lifeBarTextureWidth;
+            float frontBarWidth = barRect.width - resizeFrontBarOffsetX * 2;
+            var guiColor = GUI.color;
+            GUI.color = frontColor;
+            GUI.DrawTexture(new Rect(x + resizeFrontBarOffsetX, y, frontBarWidth * lifeValue, barRect.height), frontLifeBarTexture);
+            GUI.color = guiColor;
+        }
+    }
+    void DrawStaminaBar(float x, float y, CharacterStatus status, Rect barRect, Color frontColor)
+    {
+        float lifeValue = (float)status.Stamina / status.MaxStamina;
+        if (backLifeBarTexture != null)
+        {
+            // back bar
+            y += nameRect.height;
+            GUI.DrawTexture(new Rect(x, y, barRect.width, barRect.height), backLifeBarTexture);
+        }
+
+        // front bar
+        if (frontLifeBarTexture != null)
+        {
+            float resizeFrontBarOffsetX = frontLifeBarOffsetX * barRect.width / lifeBarTextureWidth;
+            float frontBarWidth = barRect.width - resizeFrontBarOffsetX * 2;
+            var guiColor = GUI.color;
+            GUI.color = frontColor;
+            GUI.DrawTexture(new Rect(x + resizeFrontBarOffsetX, y, frontBarWidth * lifeValue, barRect.height), frontLifeBarTexture);
+            GUI.color = guiColor;
+        }
     }
 
     void DrawMonsterStatus(float x, float y, TerrorDragonStatus status, Rect barRect, Color frontColor)

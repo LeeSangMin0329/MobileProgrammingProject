@@ -23,7 +23,9 @@ public class CharaAnimation : MonoBehaviour {
     // skill
     bool skill111 = false;
     bool skill123 = false;
-    
+    bool skill121 = false;
+
+    public GameObject swordEffect;
 
     // propertiy
     public bool IsAttacked()
@@ -41,7 +43,7 @@ public class CharaAnimation : MonoBehaviour {
     }
     public bool IsSkillEnd()
     {
-        return skill111 || skill123;
+        return skill111 || skill123 || skill121;
     }
 
     // animation event handling
@@ -58,11 +60,16 @@ public class CharaAnimation : MonoBehaviour {
     void StartAttack01()
     {
         status.uncontrollableMotion = true;
+        
     }
     void StartAttackHit01()
     {
         Debug.Log("Start Attack Hit 1");
         attackArea.OnAttack(status.attack1Power);
+        if (status.skillOn && swordEffect)
+        {
+            swordEffect.SetActive(true);
+        }
     }
 
     void EndAttackHit01()
@@ -74,21 +81,31 @@ public class CharaAnimation : MonoBehaviour {
     void EndCancel01()
     {
         status.uncontrollableMotion = true;
+        if (status.skillOn && swordEffect)
+        {
+            swordEffect.SetActive(false);
+        }
     }
     void EndAttack01()
     {
         attacked01 = true;
+        
     }
 
     // Basic Attack 2
     void StartAttack05()
     {
         status.uncontrollableMotion = true;
+        
     }
     void StartAttackHit05()
     {
         Debug.Log("Start Attack Hit 5");
         attackArea.OnAttack(status.attack2Power);
+        if (status.skillOn && swordEffect)
+        {
+            swordEffect.SetActive(true);
+        }
     }
 
     void EndAttackHit05()
@@ -100,20 +117,30 @@ public class CharaAnimation : MonoBehaviour {
     void EndCancel05()
     {
         status.uncontrollableMotion = true;
+        if (status.skillOn && swordEffect)
+        {
+            swordEffect.SetActive(false);
+        }
     }
     void EndAttack05()
     {
         attacked05 = true;
+        
     }
 
     // basic attack 3
     void StartAttack09()
     {
         status.uncontrollableMotion = true;
+        
     }
     void StartAttackHit09()
     {
         attackArea.OnAttack(status.attack3Power);
+        if (status.skillOn && swordEffect)
+        {
+            swordEffect.SetActive(true);
+        }
     }
     void EndAttackHit09()
     {
@@ -123,10 +150,15 @@ public class CharaAnimation : MonoBehaviour {
     void EndCancel09()
     {
         status.uncontrollableMotion = true;
+        if (status.skillOn && swordEffect)
+        {
+            swordEffect.SetActive(false);
+        }
     }
     void EndAttack09()
     {
         attacked09 = true;
+        
     }
 
     // Tumbling
@@ -172,14 +204,52 @@ public class CharaAnimation : MonoBehaviour {
     }
 
     // skill id 111
+    void StartSkill111()
+    {
+        if (swordEffect)
+        {
+            swordEffect.SetActive(true);
+        }
+    }
     void EndSkill111()
     {
         skill111 = true;
+        if (swordEffect)
+        {
+            swordEffect.SetActive(false);
+        }
     }
     // skill id 123
+    void StartSkill123()
+    {
+        if (swordEffect)
+        {
+            swordEffect.SetActive(true);
+        }
+    }
     void EndSkill123()
     {
         skill123 = true;
+        if (swordEffect)
+        {
+            swordEffect.SetActive(false);
+        }
+    }
+    // skill id 121
+    void StartSkill121()
+    {
+        if (swordEffect)
+        {
+            swordEffect.SetActive(true);
+        }
+    }
+    void EndSkill121()
+    {
+        skill121 = true;
+        if (swordEffect)
+        {
+            swordEffect.SetActive(false);
+        }
     }
     // ~animation event handling
 
@@ -261,7 +331,13 @@ public class CharaAnimation : MonoBehaviour {
             skill123 = false;
         }
         animator.SetBool("Skill123", !skill123 && status.skill123);
-        
+
+        if (skill121 && !status.skill121)
+        {
+            skill121 = false;
+        }
+        animator.SetBool("Skill121", !skill121 && status.skill121);
+
         // Died
         if (!isDown && status.died)
         {

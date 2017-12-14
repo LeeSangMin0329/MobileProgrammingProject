@@ -15,6 +15,8 @@ public class CharaSynchronizer : MonoBehaviour {
         Hit,
         Skill111,
         Skill123,
+        Skill121,
+        SkillOn,
     };
 
     NetworkView netView;
@@ -54,8 +56,10 @@ public class CharaSynchronizer : MonoBehaviour {
             if(status != null)
             {
                 int hp = status.HP;
+                float stamina = status.Stamina;
                 int packedFlags = PackStatusFlags();
                 stream.Serialize(ref hp);
+                stream.Serialize(ref stamina);
                 stream.Serialize(ref packedFlags);
             }
         }
@@ -67,10 +71,13 @@ public class CharaSynchronizer : MonoBehaviour {
             if(status != null)
             {
                 int hp = 0;
+                float stamina = 0;
                 int flags = 0;
                 stream.Serialize(ref hp);
+                stream.Serialize(ref stamina);
                 stream.Serialize(ref flags);
                 status.HP = hp;
+                status.Stamina = stamina;
                 UnpackStatusBit(flags);
             }
         }
@@ -88,6 +95,8 @@ public class CharaSynchronizer : MonoBehaviour {
         packed |= status.hit ? (1 << (int)BitField.Hit) : 0;
         packed |= status.skill111 ? (1 << (int)BitField.Skill111) : 0;
         packed |= status.skill123 ? (1 << (int)BitField.Skill123) : 0;
+        packed |= status.skill121 ? (1 << (int)BitField.Skill121) : 0;
+        packed |= status.skillOn ? (1 << (int)BitField.SkillOn) : 0;
 
         return packed;
     }
@@ -102,5 +111,7 @@ public class CharaSynchronizer : MonoBehaviour {
         status.hit = (bit & (1 << (int)BitField.Hit)) != 0;
         status.skill111 = (bit & (1 << (int)BitField.Skill111)) != 0;
         status.skill123 = (bit & (1 << (int)BitField.Skill123)) != 0;
+        status.skill121 = (bit & (1 << (int)BitField.Skill121)) != 0;
+        status.skillOn = (bit & (1 << (int)BitField.SkillOn)) != 0;
     }
 }

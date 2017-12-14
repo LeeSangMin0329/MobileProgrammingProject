@@ -6,6 +6,10 @@ public class CharacterStatus : MonoBehaviour {
 
     public int HP = 1000;
     public int MaxHP = 1000;
+    public float Stamina = 100;
+    public float MaxStamina = 100;
+
+    public float tumblingStamina = 30;
 
     public int Power = 100;
     public GameObject lastAttackTarget = null;
@@ -26,8 +30,10 @@ public class CharacterStatus : MonoBehaviour {
     public bool hit = false;
     public bool skill111 = false;
     public bool skill123 = false;
+    public bool skill121 = false;
 
     public bool uncontrollableMotion = true;
+    public bool skillOn = false;
 
     // Use this for initialization
     void Start () {
@@ -36,7 +42,28 @@ public class CharacterStatus : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (!skillOn)
+        {
+            if (Stamina < 100)
+            {
+                Stamina += 10.0f * Time.deltaTime;
+                if (Stamina > MaxStamina)
+                {
+                    Stamina = MaxStamina;
+                }
+            }
+        }
+        else
+        {
+            if (Stamina > 0)
+            {
+                Stamina -= 10.0f * Time.deltaTime;
+                if (Stamina < 0)
+                {
+                    Stamina = 0;
+                }
+            }
+        }
 	}
 
     [RPC]

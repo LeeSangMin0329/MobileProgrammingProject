@@ -69,6 +69,7 @@ public class PlayerCtrl : MonoBehaviour {
                 if(skillCount == 3)
                 {
                     skillEnable = false;
+                    status.skillOn = false;
                     ChangeState(State.Skill);
                 }
 
@@ -98,17 +99,23 @@ public class PlayerCtrl : MonoBehaviour {
                 }
                 if (inputManager.tumbleTrigger)
                 {
-                    ChangeState(State.Tumble);
+                    if (status.Stamina - status.tumblingStamina > 0)
+                    {
+                        status.Stamina -= status.tumblingStamina;
+                        ChangeState(State.Tumble);
+                    }
                 }
 
-                if (skillEnable && inputManager.skillTrigger)
+                if (status.Stamina == 0 || (skillEnable && inputManager.skillTrigger))
                 {
                     skillEnable = false;
-                    ChangeState(State.Skill);
+                    status.skillOn = false;
+                    ChangeState(State.Walk);
                 }
                 else if(inputManager.skillTrigger)
                 {
                     skillEnable = true;
+                    status.skillOn = true;
                 }
                 // ~trigger ctrl
                 
@@ -225,7 +232,12 @@ public class PlayerCtrl : MonoBehaviour {
         }
         else if (!skillEnable && status.uncontrollableMotion == false && inputManager.tumbleTrigger)
         {
-            ChangeState(State.Tumble);
+            if(status.Stamina - status.tumblingStamina > 0)
+            {
+                status.Stamina -= status.tumblingStamina;
+                ChangeState(State.Tumble);
+            }
+                
         }
     }
 
@@ -248,7 +260,7 @@ public class PlayerCtrl : MonoBehaviour {
     public void TumbleStart()
     {
         StateStartCommon();
-
+        
         movementHorizon.x = inputManager.horizontalMove * charactorCamera.transform.right.x;
         movementHorizon.y = 0;
         movementHorizon.z = inputManager.horizontalMove * charactorCamera.transform.right.z;
@@ -329,6 +341,9 @@ public class PlayerCtrl : MonoBehaviour {
                 case 123:
                     status.skill123 = true;
                     break;
+                case 121:
+                    status.skill121 = true;
+                    break;
                 default:
                     // skill fail
                     break;
@@ -340,6 +355,7 @@ public class PlayerCtrl : MonoBehaviour {
     {
         if (charaAnimation.IsSkillEnd())
         {
+            skillID = 0;
             ChangeState(State.Walk);
         }
     }
@@ -406,7 +422,9 @@ public class PlayerCtrl : MonoBehaviour {
         status.basicAttack3 = false;
         status.died = false;
         status.tumbling = false;
-       
+        status.skill111 = false;
+        status.skill123 = false;
+        status.skill121 = false;
     }
 
     // external part, not game logic
