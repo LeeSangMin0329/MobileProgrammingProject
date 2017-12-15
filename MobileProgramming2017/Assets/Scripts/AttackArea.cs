@@ -6,6 +6,7 @@ public class AttackArea : MonoBehaviour {
 
     CharacterStatus status;
     Collider ownCollider;
+    FollowCamera camera;
 
     // Inner class
     public class AttackInfo
@@ -26,14 +27,9 @@ public class AttackArea : MonoBehaviour {
         ownCollider = transform.GetComponent<Collider>();
         attackInfo = new AttackInfo();
         ownCollider.enabled = false;
+        camera = FindObjectOfType<FollowCamera>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    
     void GetAttackInfo()
     {
         //attackInfo.attackPower = status.Power;
@@ -52,6 +48,7 @@ public class AttackArea : MonoBehaviour {
             GetAttackInfo();
             other.transform.root.SendMessage("Damage", attackInfo);
             status.lastAttackTarget = other.transform.root.gameObject;
+            camera.ShakeOn(1);
         }
     }
 

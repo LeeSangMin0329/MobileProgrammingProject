@@ -10,14 +10,14 @@ public class CharacterStatusGui : MonoBehaviour {
     CharacterStatus playerStatus;
     Vector2 playerStatusOffset = new Vector2(8f, 80f);
 
-    Rect nameRect = new Rect(0f, 0f, 120f, 24f);
+    Rect nameRect = new Rect(0f, 0f, 90f, 16f);
     public GUIStyle nameLabelStyle;
 
     public Texture backLifeBarTexture;
     public Texture frontLifeBarTexture;
     float frontLifeBarOffsetX = 2f;
     float lifeBarTextureWidth = 128f;
-    Rect playerLifeBarRect = new Rect(0f, 0f, 128f, 16f);
+    Rect playerLifeBarRect = new Rect(0f, 0f, 90f, 10f);
     Color playerFrontLifeBarColor = Color.green;
     Rect enemyLifeBarRect = new Rect(0f, 0f, 128f, 24f);
     Color enemyFrontLifeBarColor = Color.red;
@@ -44,13 +44,16 @@ public class CharacterStatusGui : MonoBehaviour {
                 y += deltaHeight;
             }
         }
+
+        float hpBarPosX = baseWidth - ownHpBarRect.width - playerStatusOffset.x;
+
         DrawHpBar(
-                    Screen.width * 0.7f, 0,
+                    hpBarPosX, 0,
                     playerStatus,
                     ownHpBarRect,
                     playerFrontLifeBarColor);
         DrawStaminaBar(
-                    Screen.width * 0.7f, Screen.height * 0.05f,
+                    hpBarPosX, ownHpBarRect.height,
                     playerStatus,
                     ownHpBarRect,
                     Color.yellow);

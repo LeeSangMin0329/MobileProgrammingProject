@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1448967714803366
 GameObject:
   m_ObjectHideFlags: 1
@@ -3063,6 +3063,7 @@ MonoBehaviour:
   tumbleDistance: 50000
   charactorCamera: {fileID: 0}
   speed: 200
+  skillOnEffect: {fileID: 1438924358012084}
 --- !u!114 &114196723968486846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3112,6 +3113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 1000
   MaxHP: 1000
+  Stamina: 100
+  MaxStamina: 100
+  tumblingStamina: 30
   Power: 10
   lastAttackTarget: {fileID: 0}
   characterName: Player
@@ -3435,7 +3439,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1507374102
+  randomSeed: 1835621832
   InitialModule:
     serializedVersion: 3
     enabled: 1

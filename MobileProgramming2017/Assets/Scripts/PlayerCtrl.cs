@@ -15,6 +15,7 @@ public class PlayerCtrl : MonoBehaviour {
     public float tumbleDistance = 150f;
 
     public Camera charactorCamera;
+    FollowCamera charaCameraScript;
 
     public float speed = 200f;
 
@@ -30,6 +31,8 @@ public class PlayerCtrl : MonoBehaviour {
     int skillCount = 0;
     bool skillEnable = false;
     int[] skill;
+
+    public GameObject skillOnEffect;
 
     //const float RayCastMaxDistance = 100.0f;
     CharacterStatus status;
@@ -52,6 +55,8 @@ public class PlayerCtrl : MonoBehaviour {
         status = GetComponent<CharacterStatus>();
         charaAnimation = GetComponent<CharaAnimation>();
         skill = new int[3];
+
+        charaCameraScript = charactorCamera.GetComponent<FollowCamera>();
 	}
 	
     
@@ -110,11 +115,19 @@ public class PlayerCtrl : MonoBehaviour {
                 {
                     skillEnable = false;
                     status.skillOn = false;
+                    if (skillOnEffect)
+                    {
+                        skillOnEffect.SetActive(false);
+                    }
                     ChangeState(State.Walk);
                 }
                 else if(inputManager.skillTrigger)
                 {
                     skillEnable = true;
+                    if (skillOnEffect)
+                    {
+                        skillOnEffect.SetActive(true);
+                    }
                     status.skillOn = true;
                 }
                 // ~trigger ctrl
@@ -356,6 +369,10 @@ public class PlayerCtrl : MonoBehaviour {
         if (charaAnimation.IsSkillEnd())
         {
             skillID = 0;
+            if (skillOnEffect)
+            {
+                skillOnEffect.SetActive(false);
+            }
             ChangeState(State.Walk);
         }
     }
@@ -412,6 +429,8 @@ public class PlayerCtrl : MonoBehaviour {
                 transform.LookAt(hitDirection);
                 ChangeState(State.Hit);
             }
+
+            charaCameraScript.ShakeOn(1);
         }
     }
 

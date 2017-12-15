@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\CharaSynchronizer.cs" />
     <Compile Include="Assets\Scripts\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\EnemyCtrl.cs" />
+    <Compile Include="Assets\Scripts\EnemySynchronizer.cs" />
     <Compile Include="Assets\Scripts\EntranceEvent.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\GameRuleCtrl.cs" />
@@ -109,6 +110,13 @@
     <Compile Include="Assets\Scripts\TerrorDragonAnimation.cs" />
     <Compile Include="Assets\Scripts\TerrorDragonCtrl.cs" />
     <Compile Include="Assets\Scripts\TerrorDragonStatus.cs" />
+    <Compile Include="Assets\Scripts\UI\CharacterStatusGui.cs" />
+    <Compile Include="Assets\Scripts\UI\GameTimerGui.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory.cs" />
+    <Compile Include="Assets\Scripts\UI\Item.cs" />
+    <Compile Include="Assets\Scripts\UI\ItemDatabase.cs" />
+    <Compile Include="Assets\Scripts\UI\NamePlate.cs" />
+    <Compile Include="Assets\Scripts\UI\Slot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3D Assets\Terrain\Shadowball Games\Fantasy Tavern Pack\Asset Pack Readme.txt" />

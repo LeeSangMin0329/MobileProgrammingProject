@@ -771,13 +771,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1388742245}
-  m_LocalRotation: {x: 0.19623573, y: -0, z: -0, w: 0.9805568}
-  m_LocalPosition: {x: -52.92, y: 2.83, z: -41.64}
+  m_LocalRotation: {x: 0.604702, y: 0.28564012, z: -0.08239235, w: 0.7388889}
+  m_LocalPosition: {x: -55.4, y: 69.1, z: -31.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 22.634, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70.167, y: 71.885, z: 41.248}
 --- !u!114 &1388742251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24b57b585c15b7489a9ffcd01bdc136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerIcon: {fileID: 2800000, guid: 75aef127eb07a304ca202bbd83e317d4, type: 3}
+  timerIcon: {fileID: 2800000, guid: b1dcb72eda8c2414f96d24520694b036, type: 3}
   timerLabelStyle:
     m_Name: 
     m_Normal:
@@ -1024,7 +1024,7 @@ MonoBehaviour:
     m_Normal:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
@@ -1074,7 +1074,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 0}
-    m_FontSize: 20
+    m_FontSize: 15
     m_FontStyle: 0
     m_Alignment: 2
     m_WordWrap: 0

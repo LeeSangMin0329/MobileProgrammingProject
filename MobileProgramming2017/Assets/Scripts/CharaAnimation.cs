@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharaAnimation : MonoBehaviour {
-
-   
+    
     Animator animator;
     CharacterStatus status;
     AttackArea attackArea;
@@ -80,7 +79,7 @@ public class CharaAnimation : MonoBehaviour {
     }
     void EndCancel01()
     {
-        status.uncontrollableMotion = true;
+        //status.uncontrollableMotion = true;
         if (status.skillOn && swordEffect)
         {
             swordEffect.SetActive(false);
@@ -116,7 +115,7 @@ public class CharaAnimation : MonoBehaviour {
     }
     void EndCancel05()
     {
-        status.uncontrollableMotion = true;
+        //status.uncontrollableMotion = true;
         if (status.skillOn && swordEffect)
         {
             swordEffect.SetActive(false);
@@ -149,7 +148,7 @@ public class CharaAnimation : MonoBehaviour {
     }
     void EndCancel09()
     {
-        status.uncontrollableMotion = true;
+        //status.uncontrollableMotion = true;
         if (status.skillOn && swordEffect)
         {
             swordEffect.SetActive(false);
@@ -269,7 +268,6 @@ public class CharaAnimation : MonoBehaviour {
         // move
         Vector3 deltaPosition = transform.position - prePosition;
         animator.SetFloat("Speed", deltaPosition.magnitude / Time.deltaTime);
-
 
         
         // Basic attack
