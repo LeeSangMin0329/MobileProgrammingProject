@@ -45,15 +45,14 @@ public class CharacterStatusGui : MonoBehaviour {
             }
         }
 
-        float hpBarPosX = baseWidth - ownHpBarRect.width - playerStatusOffset.x;
-
+        
         DrawHpBar(
-                    hpBarPosX, 0,
+                    playerStatusOffset.x, 0,
                     playerStatus,
                     ownHpBarRect,
                     playerFrontLifeBarColor);
         DrawStaminaBar(
-                    hpBarPosX, ownHpBarRect.height,
+                    playerStatusOffset.x, ownHpBarRect.height,
                     playerStatus,
                     ownHpBarRect,
                     Color.yellow);

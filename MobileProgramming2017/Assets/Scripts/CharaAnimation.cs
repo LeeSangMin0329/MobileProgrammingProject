@@ -210,6 +210,14 @@ public class CharaAnimation : MonoBehaviour {
             swordEffect.SetActive(true);
         }
     }
+    void StartAttackSkill111()
+    {
+        attackArea.OnAttack(100);
+    }
+    void EndAttackSkill111()
+    {
+        attackArea.OnAttackTermination();
+    }
     void EndSkill111()
     {
         skill111 = true;
@@ -226,6 +234,14 @@ public class CharaAnimation : MonoBehaviour {
             swordEffect.SetActive(true);
         }
     }
+    void StartAttackSkill123()
+    {
+        attackArea.OnAttack(100);
+    }
+    void EndAttackSkill123()
+    {
+        attackArea.OnAttackTermination();
+    }
     void EndSkill123()
     {
         skill123 = true;
@@ -241,6 +257,14 @@ public class CharaAnimation : MonoBehaviour {
         {
             swordEffect.SetActive(true);
         }
+    }
+    void StartAttackSkill121()
+    {
+        attackArea.OnAttack(100);
+    }
+    void EndAttackSkill121()
+    {
+        attackArea.OnAttackTermination();
     }
     void EndSkill121()
     {
