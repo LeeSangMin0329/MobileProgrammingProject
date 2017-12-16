@@ -56,7 +56,7 @@ public class PlayerCtrl : MonoBehaviour {
         charaAnimation = GetComponent<CharaAnimation>();
         skill = new int[3];
 
-        charaCameraScript = charactorCamera.GetComponent<FollowCamera>();
+        
 	}
 	
     
@@ -367,7 +367,11 @@ public class PlayerCtrl : MonoBehaviour {
                     status.skill121 = true;
                     break;
                 default:
-                    // skill fail
+                    if (skillOnEffect)
+                    {
+                        skillOnEffect.SetActive(false);
+                    }
+                    ChangeState(State.Walk);
                     break;
             }
         }
@@ -459,6 +463,7 @@ public class PlayerCtrl : MonoBehaviour {
     public void SetCamera(Camera mainCamera)
     {
         charactorCamera = mainCamera;
+        charaCameraScript = charactorCamera.GetComponent<FollowCamera>();
     }
 
     // @override

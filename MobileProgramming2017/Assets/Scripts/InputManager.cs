@@ -25,135 +25,93 @@ public class InputManager : NetworkBehaviour {
 
     public bool skillTrigger = false;
 
-    
 
-    // Update is called once per frame
-    void Update () {
-
-        // wasd
-        horizontalMove = Input.GetAxisRaw("Horizontal");
-        verticalMove = Input.GetAxisRaw("Vertical");
-
-        // must change mobile touch / slide
-        if(Input.GetButtonDown("Fire1"))
-        {
-            slideStartPosition = GetCursorPosition();
-        }
-
-        if(Input.GetButton("Fire1"))
-        {
-            if(Vector2.Distance(slideStartPosition, GetCursorPosition()) >= (Screen.width * 0.1f))
-            {
-                moved = true;
-            }
-        }
-
-        if(!Input.GetButtonUp("Fire1") && !Input.GetButton("Fire1"))
-        {
-            moved = false;
-        }
-        
-        if(moved)
-        {
-            delta = GetCursorPosition() - prevPosition;
-        }
-        else
-        {
-            delta = Vector2.zero;
-        }
-
-        prevPosition = GetCursorPosition();
-
-        // tumble
-        if (Input.GetButtonDown("Jump"))
-        {
-            tumbleTrigger = true;
-        }
-        else
-        {
-            tumbleTrigger = false;
-        }
-
-        
-        /*
-        // attack
-        if (Input.GetButtonDown("BasicAttack1"))
-        {
-            basicAttackTrigger1 = true;
-        }
-        else
-        {
-            basicAttackTrigger1 = false;
-        }
-        if (Input.GetButtonDown("BasicAttack2"))
-        {
-            basicAttackTrigger2 = true;
-        }
-        else
-        {
-            basicAttackTrigger2 = false;
-        }
-        if (Input.GetButtonDown("BasicAttack3"))
-        {
-            basicAttackTrigger3 = true;
-        }
-        else
-        {
-            basicAttackTrigger3 = false;
-        }
-
-        if (Input.GetButtonDown("Skill"))
-        {
-            skillTrigger = true;
-        }
-        else
-        {
-            skillTrigger = false;
-        }
-        */
-    }
     Touch tempTouchs;
     Vector3 touchedPos;
-    public void OnAttack1Down()
-    {
-        if(EventSystem.current.IsPointerOverGameObject() == true)
+    
+    // Update is called once per frame
+    void Update () {
+        
+        if(Input.touchCount > 0)
         {
-            basicAttackTrigger1 = true;
-        }
-        /*
-        for(int i=0; i<Input.touchCount; i++)
-        {
-            if (EventSystem.current.IsPointerOverGameObject(i) == false)
+            for(int i=0; i<Input.touchCount; i++)
             {
-                tempTouchs = Input.GetTouch(i);
-                if(tempTouchs.phase == TouchPhase.Began)
+                if(EventSystem.current.IsPointerOverGameObject(i) == false)
                 {
-                    touchedPos = Camera.main.ScreenToWorldPoint(tempTouchs.position);
-                    basicAttackTrigger1 = true;
-                    break; // 1 frame 1 touch only set;
+                    tempTouchs = Input.GetTouch(i);
+                    if (tempTouchs.phase == TouchPhase.Began)
+                    {
+                        slideStartPosition = GetCursorPosition();
+                    }
+
+                    if (tempTouchs.phase == TouchPhase.Moved)
+                    {
+                        if (Vector2.Distance(slideStartPosition, GetCursorPosition()) >= (Screen.width * 0.05f))
+                        {
+                            moved = true;
+                        }
+                    }
+
+                    if (tempTouchs.phase == TouchPhase.Ended)
+                    {
+                        moved = false;
+                    }
+                    if (moved)
+                    {
+                        delta = GetCursorPosition() - prevPosition;
+                    }
+                    else
+                    {
+                        delta = Vector2.zero;
+                    }
+
+                    prevPosition = GetCursorPosition();
                 }
+
             }
         }
-       */
+
+
+        
+
+    }
+
+
+    public void OnAttack1Down()
+    {
+        basicAttackTrigger1 = true;
     }
     public void OnAttack1Up()
     {
         basicAttackTrigger1 = false;
     }
-    
-
-    public bool Clicked()
+    public void OnAttack2Down()
     {
-        if(!moved && Input.GetButtonUp("Fire1"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        basicAttackTrigger2 = true;
+    }
+    public void OnAttack2Up()
+    {
+        basicAttackTrigger2 = false;
+    }
+    public void OnAttack3Down()
+    {
+        basicAttackTrigger3 = true;
+    }
+    public void OnAttack3Up()
+    {
+        basicAttackTrigger3 = false;
     }
 
+    
+    public void OnSkillDown()
+    {
+        skillTrigger = true;
+    }
+    public void OnSkillUp()
+    {
+        skillTrigger = false;
+    }
+    
     public bool Moved()
     {
         return moved;
