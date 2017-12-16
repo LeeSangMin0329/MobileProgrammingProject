@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+using UnityEngine.EventSystems;
+
 public class InputManager : NetworkBehaviour {
 
     // slide variable
@@ -72,6 +74,8 @@ public class InputManager : NetworkBehaviour {
             tumbleTrigger = false;
         }
 
+        
+        /*
         // attack
         if (Input.GetButtonDown("BasicAttack1"))
         {
@@ -106,8 +110,36 @@ public class InputManager : NetworkBehaviour {
         {
             skillTrigger = false;
         }
+        */
     }
-
+    Touch tempTouchs;
+    Vector3 touchedPos;
+    public void OnAttack1Down()
+    {
+        if(EventSystem.current.IsPointerOverGameObject() == true)
+        {
+            basicAttackTrigger1 = true;
+        }
+        /*
+        for(int i=0; i<Input.touchCount; i++)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(i) == false)
+            {
+                tempTouchs = Input.GetTouch(i);
+                if(tempTouchs.phase == TouchPhase.Began)
+                {
+                    touchedPos = Camera.main.ScreenToWorldPoint(tempTouchs.position);
+                    basicAttackTrigger1 = true;
+                    break; // 1 frame 1 touch only set;
+                }
+            }
+        }
+       */
+    }
+    public void OnAttack1Up()
+    {
+        basicAttackTrigger1 = false;
+    }
     
 
     public bool Clicked()

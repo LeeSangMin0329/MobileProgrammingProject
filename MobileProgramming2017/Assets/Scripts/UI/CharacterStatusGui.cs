@@ -64,7 +64,7 @@ public class CharacterStatusGui : MonoBehaviour {
         {
             TerrorDragonStatus targetStatus = playerStatus.lastAttackTarget.GetComponent<TerrorDragonStatus>();
             DrawMonsterStatus(
-                (baseWidth - enemyLifeBarRect.width) / 2.0f, 0f,
+                (ownHpBarRect.width + playerStatusOffset.x * 3), 8f,
                 targetStatus,
                 enemyLifeBarRect,
                 enemyFrontLifeBarColor);

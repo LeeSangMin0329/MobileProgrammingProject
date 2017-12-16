@@ -313,6 +313,15 @@ public class PlayerCtrl : MonoBehaviour {
     {
         StateStartCommon();
         characterMove.enabled = false;
+        if (status.skillOn)
+        {
+            skillEnable = false;
+            status.skillOn = false;
+            if (skillOnEffect)
+            {
+                skillOnEffect.SetActive(false);
+            }
+        }
     }
     void Hitting()
     {
