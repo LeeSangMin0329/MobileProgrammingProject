@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour {
 
     void Awake()
     {
-        instance = this;
+        Inventory.instance = this;
     }
 
     void Start()

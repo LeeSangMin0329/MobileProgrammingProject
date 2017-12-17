@@ -1144,6 +1144,11 @@ Prefab:
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 790315456}
+    - target: {fileID: 114535127149224718, guid: 93cdad4927084fc4dbf1ae6d804cfbc2,
+        type: 2}
+      propertyPath: slotCount
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93cdad4927084fc4dbf1ae6d804cfbc2, type: 2}
   m_IsPrefabParent: 0
