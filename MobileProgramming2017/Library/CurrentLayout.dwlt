@@ -105,10 +105,10 @@ MonoBehaviour:
     y: 30
     width: 1904
     height: 931
-  m_MinSize: {x: 911, y: 442}
-  m_MaxSize: {x: 22006, y: 10021}
+  m_MinSize: {x: 917, y: 442}
+  m_MaxSize: {x: 22012, y: 10021}
   vertical: 1
-  controlID: 92
+  controlID: 153
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -131,10 +131,10 @@ MonoBehaviour:
     y: 0
     width: 1904
     height: 931
-  m_MinSize: {x: 911, y: 442}
-  m_MaxSize: {x: 22006, y: 10021}
+  m_MinSize: {x: 917, y: 442}
+  m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 93
+  controlID: 154
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,14 +177,14 @@ MonoBehaviour:
     y: 0
     width: 722
     height: 515
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 0
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,8 +203,8 @@ MonoBehaviour:
     y: 515
     width: 722
     height: 416
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -228,8 +228,8 @@ MonoBehaviour:
     y: 0
     width: 307
     height: 931
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -278,8 +278,8 @@ MonoBehaviour:
     y: 0
     width: 479
     height: 931
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -388,14 +388,14 @@ MonoBehaviour:
     width: 720
     height: 494
   m_SceneLighting: 1
-  lastFramingTime: 330.7199106967288
+  lastFramingTime: 185.50229596348225
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -40.13459, y: 4.361348, z: -39.84524}
+    m_Target: {x: -0.7760016, y: 0.03770943, z: 0.25388813}
     speed: 2
-    m_Value: {x: -40.13459, y: 4.361348, z: -39.84524}
+    m_Value: {x: -0.7760016, y: 0.03770943, z: 0.25388813}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -418,13 +418,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.16302909, y: -0.4065555, z: 0.07398077, w: 0.8959135}
+    m_Target: {x: -0.2535178, y: -0.5604794, z: 0.18542638, w: -0.7662954}
     speed: 2
-    m_Value: {x: -0.16302909, y: 0.40655553, z: -0.07398077, w: -0.89591354}
+    m_Value: {x: -0.2535178, y: -0.5604794, z: 0.18542638, w: -0.7662954}
   m_Size:
-    m_Target: 42.887066
+    m_Target: 0.2915619
     speed: 2
-    m_Value: 42.887066
+    m_Value: 0.2915619
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -517,18 +517,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 321cfdff421dfdffec37fdfff437fdff8ab2ffff92b2ffff9eb2ffffa4b2ffff38b3ffff42b3ffff6eb3ffffc6b3ffffc8b3ffff7cceffff64cfffff0eeaffff16eaffff5ef8ffff00000000be67000008680000b6680000c6680000146900002a6900003a6900005a6900005e69000086690000ba690000406a0000666a00006a6a0000886a0000
+    m_ExpandedIDs: 56b4ffff1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Spine2
-      m_OriginalName: Spine2
+      m_Name: Heavy_Full_Metal_Sword
+      m_OriginalName: Heavy_Full_Metal_Sword
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 26900
+      m_UserData: -19368
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -578,19 +578,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Effect/PyroParticles/Prefab/Audio
+    - Assets/3D Assets/Player/Heavy_Full_Metal_Sword
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Effect/PyroParticles/Prefab/Audio
+  - Assets/3D Assets/Player/Heavy_Full_Metal_Sword
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\GitReporsitory\mp2017\MobileProgramming2017
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 48370000
-    m_LastClickedID: 14152
-    m_ExpandedIDs: 00000000a8310000f2330000e23500001a3600003c3a00001a3e000000ca9a3bffffff7f
+    m_SelectedIDs: a4340000
+    m_LastClickedID: 13476
+    m_ExpandedIDs: 0000000068260000b82800004e290000ce2a00000a2b00000c2b0000c22f0000de320000b4330000a434000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a8310000f23300001a3e0000
+    m_ExpandedIDs: 0000000068260000b8280000ce2a00000a2b00000c2b0000c22f0000de320000b4330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -649,18 +649,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 28260000da2f0000bcb9000068ba00000c2b00002627000038280000f6280000f6270000c2280000d82800000c2800005c060000000000007a2f00007c2f0000b42b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Specular setup Materials
+      m_OriginalName: Specular setup Materials
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 11940
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:

@@ -6,7 +6,7 @@ public class CharaAnimation : MonoBehaviour {
     
     Animator animator;
     CharacterStatus status;
-    AttackArea attackArea;
+    public AttackArea attackArea;
     Vector3 prePosition;
     bool isDown = false;
     bool attacked01 = false;
@@ -286,7 +286,6 @@ public class CharaAnimation : MonoBehaviour {
         status = GetComponent<CharacterStatus>();
 
         prePosition = transform.position;
-        attackArea = GetComponentInChildren<AttackArea>();
 	}
 
     bool skillEffTrigger = false;
