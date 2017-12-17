@@ -20,6 +20,8 @@ public class TerrorDragonStatus : MonoBehaviour {
 
     public GameObject lastAttacker = null;
 
+    public float constrollerOffset = 1f;
+
     // status
     public int HP = 100000;
     public int MaxHP = 100000;

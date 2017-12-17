@@ -24,7 +24,7 @@ public class TerrorDragonAnimation : MonoBehaviour {
 
     public EnemyAttackArea shoutArea;
     public EnemyAttackArea flightRushArea;
-    
+  
 
 
     // animation state variable
@@ -40,6 +40,9 @@ public class TerrorDragonAnimation : MonoBehaviour {
 
     public GameObject fireEffect;
     public GameObject shoutEffect;
+    public GameObject rightWingFireEffect;
+    public GameObject leftWingFireEffect;
+
 
     // property
 
@@ -252,10 +255,14 @@ public class TerrorDragonAnimation : MonoBehaviour {
         {
             flightRushArea.SetAttackPower(400);
             flightRushArea.OnAttack();
+            rightWingFireEffect.SetActive(true);
+            leftWingFireEffect.SetActive(true);
         }
         else
         {
             flightRushArea.OnAttackTermination();
+            rightWingFireEffect.SetActive(false);
+            leftWingFireEffect.SetActive(false);
         }
 
         // flight fire

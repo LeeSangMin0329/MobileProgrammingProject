@@ -6,7 +6,12 @@ public class AttackArea : MonoBehaviour {
 
     CharacterStatus status;
     Collider ownCollider;
-    FollowCamera camera;
+    FollowCamera ownCamera;
+
+    public AudioClip attackSeClip;
+    AudioSource attackSeAudio;
+    public AudioClip hitSeClip;
+    AudioSource hitSeAudio;
 
     // Inner class
     public class AttackInfo
@@ -27,7 +32,19 @@ public class AttackArea : MonoBehaviour {
         ownCollider = transform.GetComponent<Collider>();
         attackInfo = new AttackInfo();
         ownCollider.enabled = false;
-        camera = FindObjectOfType<FollowCamera>();
+        ownCamera = FindObjectOfType<FollowCamera>();
+
+        // audio
+
+        attackSeAudio = gameObject.AddComponent<AudioSource>();
+        attackSeAudio.clip = attackSeClip;
+        attackSeAudio.loop = false;
+        attackSeAudio.volume = 0.5f;
+
+        hitSeAudio = gameObject.AddComponent<AudioSource>();
+        hitSeAudio.clip = hitSeClip;
+        hitSeAudio.loop = false;
+        hitSeAudio.volume = 0.3f;
     }
     
     void GetAttackInfo()
@@ -48,7 +65,8 @@ public class AttackArea : MonoBehaviour {
             GetAttackInfo();
             other.transform.root.SendMessage("Damage", attackInfo);
             status.lastAttackTarget = other.transform.root.gameObject;
-            camera.ShakeOn(1);
+            ownCamera.ShakeOn(1);
+            hitSeAudio.Play();
         }
     }
 
@@ -56,6 +74,7 @@ public class AttackArea : MonoBehaviour {
     {
         attackInfo.attackPower = attackPower;
         ownCollider.enabled = true;
+        attackSeAudio.Play();
     }
 
     public void OnAttackTermination()

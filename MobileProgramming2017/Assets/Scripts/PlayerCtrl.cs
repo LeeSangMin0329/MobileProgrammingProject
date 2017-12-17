@@ -31,13 +31,16 @@ public class PlayerCtrl : MonoBehaviour {
     int skillCount = 0;
     bool skillEnable = false;
     int[] skill;
-
-    public GameObject skillOnEffect;
-
+    
     //const float RayCastMaxDistance = 100.0f;
     CharacterStatus status;
     CharaAnimation charaAnimation;
     Transform attackTarget;
+
+
+    //audio
+    public AudioClip deathSeClip;
+    AudioSource deathSeAudio;
     
     void Awake()
     {
@@ -56,7 +59,11 @@ public class PlayerCtrl : MonoBehaviour {
         charaAnimation = GetComponent<CharaAnimation>();
         skill = new int[3];
 
-        
+        //audio
+        deathSeAudio = gameObject.AddComponent<AudioSource>();
+
+        deathSeAudio.loop = false;
+        deathSeAudio.clip = deathSeClip;
 	}
 	
     
@@ -115,19 +122,11 @@ public class PlayerCtrl : MonoBehaviour {
                 {
                     skillEnable = false;
                     status.skillOn = false;
-                    if (skillOnEffect)
-                    {
-                        skillOnEffect.SetActive(false);
-                    }
                     ChangeState(State.Walk);
                 }
                 else if(inputManager.skillTrigger)
                 {
                     skillEnable = true;
-                    if (skillOnEffect)
-                    {
-                        skillOnEffect.SetActive(true);
-                    }
                     status.skillOn = true;
                 }
                 // ~trigger ctrl
@@ -257,6 +256,7 @@ public class PlayerCtrl : MonoBehaviour {
     // died
     void Died()
     {
+        deathSeAudio.Play();
         characterMove.enabled = false;
         status.died = true;
         Invoke("DelayedDestroy", 8.0f);
@@ -329,10 +329,6 @@ public class PlayerCtrl : MonoBehaviour {
                 skillEnable = false;
                 status.skillOn = false;
                 skillID = 0;
-                if (skillOnEffect)
-                {
-                    skillOnEffect.SetActive(false);
-                }
             }
             ChangeState(State.Walk);
             
@@ -369,10 +365,6 @@ public class PlayerCtrl : MonoBehaviour {
                     status.skill121 = true;
                     break;
                 default:
-                    if (skillOnEffect)
-                    {
-                        skillOnEffect.SetActive(false);
-                    }
                     ChangeState(State.Walk);
                     break;
             }
@@ -384,10 +376,6 @@ public class PlayerCtrl : MonoBehaviour {
         if (charaAnimation.IsSkillEnd())
         {
             skillID = 0;
-            if (skillOnEffect)
-            {
-                skillOnEffect.SetActive(false);
-            }
             ChangeState(State.Walk);
         }
     }

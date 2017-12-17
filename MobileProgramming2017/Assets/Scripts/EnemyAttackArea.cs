@@ -8,6 +8,13 @@ public class EnemyAttackArea : MonoBehaviour {
     bool collisionTrigger = false;
     public int attackPower = 250;
 
+    public AudioClip attackSeClip;
+    AudioSource attackSeAudio;
+
+    public AudioClip hitSeClip;
+    AudioSource hitSeAudio;
+
+
     //Inner class
     public class AttackInfo
     {
@@ -18,8 +25,18 @@ public class EnemyAttackArea : MonoBehaviour {
     AttackInfo attackInfo;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         attackInfo = new AttackInfo();
+
+        // audio
+        attackSeAudio = gameObject.AddComponent<AudioSource>();
+        attackSeAudio.clip = attackSeClip;
+        attackSeAudio.loop = false;
+        attackSeAudio.volume = 0.5f;
+        hitSeAudio = gameObject.AddComponent<AudioSource>();
+        hitSeAudio.clip = hitSeClip;
+        hitSeAudio.loop = false;
+        hitSeAudio.volume = 0.5f;
 	}
 	
 	// Update is called once per frame
@@ -37,7 +54,11 @@ public class EnemyAttackArea : MonoBehaviour {
                 direction = direction.normalized;
                 attackInfo.hitDirection = direction;
                 attackInfo.attackPower = attackPower;
-
+                if (hitSeAudio)
+                {
+                    if(!hitSeAudio.isPlaying)
+                        hitSeAudio.Play();
+                }
                 other.transform.SendMessage("Damage", attackInfo);
             }
         }
@@ -46,6 +67,10 @@ public class EnemyAttackArea : MonoBehaviour {
     public void OnAttack()
     {
         collisionTrigger = true;
+        if (attackSeAudio)
+        {
+            attackSeAudio.Play();
+        }
     }
     public void OnAttackTermination()
     {

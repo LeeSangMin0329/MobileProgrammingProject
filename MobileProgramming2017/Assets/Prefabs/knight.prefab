@@ -3063,7 +3063,7 @@ MonoBehaviour:
   tumbleDistance: 50000
   charactorCamera: {fileID: 0}
   speed: 200
-  skillOnEffect: {fileID: 1438924358012084}
+  deathSeClip: {fileID: 8300000, guid: 7194498376b69464b9135a3835a375e2, type: 3}
 --- !u!114 &114196723968486846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3076,6 +3076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordEffect: {fileID: 1828037383021998}
+  skillOnEffect: {fileID: 1438924358012084}
 --- !u!114 &114250519357572308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3145,6 +3146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaeabbc7c350314faab18b1169b74d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSeClip: {fileID: 8300000, guid: 583690d836ed924408a04a664b45a549, type: 3}
+  hitSeClip: {fileID: 8300000, guid: 03cbdeb1663054a42a4583f182c943d4, type: 3}
 --- !u!114 &114645649309743022
 MonoBehaviour:
   m_ObjectHideFlags: 1

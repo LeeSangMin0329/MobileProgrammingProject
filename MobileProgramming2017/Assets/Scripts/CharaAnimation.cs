@@ -25,6 +25,8 @@ public class CharaAnimation : MonoBehaviour {
     bool skill121 = false;
 
     public GameObject swordEffect;
+    public GameObject skillOnEffect;
+
 
     // propertiy
     public bool IsAttacked()
@@ -287,8 +289,21 @@ public class CharaAnimation : MonoBehaviour {
         attackArea = GetComponentInChildren<AttackArea>();
 	}
 
+    bool skillEffTrigger = false;
     // Update is called once per frame
     void Update() {
+        
+        if (status.skillOn && !skillEffTrigger)
+        {
+            skillOnEffect.SetActive(true);
+            skillEffTrigger = true;
+        }
+        else if(!status.skillOn && skillEffTrigger)
+        {
+            skillOnEffect.SetActive(false);
+            skillEffTrigger = false;
+        }
+
         // move
         Vector3 deltaPosition = transform.position - prePosition;
         animator.SetFloat("Speed", deltaPosition.magnitude / Time.deltaTime);

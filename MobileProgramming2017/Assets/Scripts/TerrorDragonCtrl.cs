@@ -29,8 +29,9 @@ public class TerrorDragonCtrl : MonoBehaviour {
 
     //effect
     public GameObject hitEffect;
-    public GameObject rightWingFireEffect;
-    public GameObject leftWingFireEffect;
+
+    // audio
+    public AudioClip deathSeClip;
 
     // Use this for initialization
     void Start() {
@@ -44,6 +45,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
         basePosition = transform.position;
         waitTime = waitBaseTime;
         attackTarget = null;
+
     }
 
     // Update is called once per frame
@@ -237,14 +239,6 @@ public class TerrorDragonCtrl : MonoBehaviour {
         if (status.flighting)
         {
             status.flightRush = true;
-            if (rightWingFireEffect)
-            {
-                rightWingFireEffect.SetActive(true);
-            }
-            if (leftWingFireEffect)
-            {
-                leftWingFireEffect.SetActive(true);
-            }
         }
     }
     void Running()
@@ -252,17 +246,6 @@ public class TerrorDragonCtrl : MonoBehaviour {
         if (characterMove.Arrived())
         {
             ChangeState(State.Walk);
-            if (status.flighting)
-            {
-                if (rightWingFireEffect)
-                {
-                    rightWingFireEffect.SetActive(false);
-                }
-                if (leftWingFireEffect)
-                {
-                    leftWingFireEffect.SetActive(false);
-                }
-            }
         }
     }
 
@@ -393,14 +376,14 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         StateStartCommon();
         status.flighting = true;
-
+        status.constrollerOffset = 5.0f;
 
     }
     void FlightUP()
     {
         if (status.flightDontMove)
         {
-            characterMove.SetControllerOffsetY(5.0f);
+            //characterMove.SetControllerOffsetY(status.constrollerOffset);
         }
         //characterMove.UseGravity(false);
         if (terrAnimation.IsFlightUp())
@@ -415,12 +398,13 @@ public class TerrorDragonCtrl : MonoBehaviour {
         StateStartCommon();
         status.flighting = false;
         characterMove.StopMove();
+        status.constrollerOffset = 1f;
     }
     void FlightDown()
     {
         if (status.flightDontMove)
         {
-            characterMove.SetControllerOffsetY(1f);
+            //characterMove.SetControllerOffsetY(status.constrollerOffset);
         }
 
         if (terrAnimation.IsFlightDown())
@@ -446,8 +430,10 @@ public class TerrorDragonCtrl : MonoBehaviour {
     void Died()
     {
         status.died = true;
+        FindObjectOfType<GameRuleCtrl>().GameClear();
         Network.Destroy(gameObject);
         Network.RemoveRPCs(netView.viewID);
+        AudioSource.PlayClipAtPoint(deathSeClip, transform.position);
     }
 
     void Damage(AttackArea.AttackInfo attackInfo)

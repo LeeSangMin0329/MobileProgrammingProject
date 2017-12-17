@@ -22,7 +22,7 @@ public class EnemySynchronizer : MonoBehaviour {
 
     Vector3 position;
     Quaternion rotation;
-
+  
     TerrorDragonStatus status;
 
 	// Use this for initialization
