@@ -28,52 +28,103 @@ public class InputManager : NetworkBehaviour {
 
     Touch tempTouchs;
     Vector3 touchedPos;
+    bool drawFlag = false;
+    int dragIndex = 0;
     
     // Update is called once per frame
     void Update () {
-        
-        if(Input.touchCount > 0)
+
+        /*
+         if(!drawFlag)
+         {
+             if (Input.touchCount > 0)
+             {
+                 for (int i = 0; i < Input.touchCount; i++)
+                 {
+                     if (EventSystem.current.IsPointerOverGameObject(i) == false)
+                     {
+                         tempTouchs = Input.GetTouch(i);
+                         drawFlag = true;
+                         break;
+                     }
+                 }
+             }
+         }
+
+         if (drawFlag)
+         {
+             for(int i=0; i<Input.touchCount; i++)
+             {
+                 if(Input.GetTouch(i).Equals(tempTouchs))
+                 {
+                     if (tempTouchs.phase == TouchPhase.Began)
+                     {
+                         slideStartPosition = GetCursorPosition();
+                     }
+                     if (tempTouchs.phase == TouchPhase.Moved)
+                     {
+                         if (Vector2.Distance(slideStartPosition, GetCursorPosition()) >= (Screen.width * 0.05f))
+                         {
+                             moved = true;
+                         }
+                     }
+
+                     if (tempTouchs.phase == TouchPhase.Ended)
+                     {
+                         moved = false;
+                         drawFlag = false;
+                     }
+                     if (moved)
+                     {
+                         delta = GetCursorPosition() - prevPosition;
+                     }
+                     else
+                     {
+                         delta = Vector2.zero;
+                     }
+
+                     prevPosition = GetCursorPosition();
+                 }
+             }
+         }*/
+        if (moved)
         {
-            for(int i=0; i<Input.touchCount; i++)
-            {
-                if(EventSystem.current.IsPointerOverGameObject(i) == false)
-                {
-                    tempTouchs = Input.GetTouch(i);
-                    if (tempTouchs.phase == TouchPhase.Began)
-                    {
-                        slideStartPosition = GetCursorPosition();
-                    }
-
-                    if (tempTouchs.phase == TouchPhase.Moved)
-                    {
-                        if (Vector2.Distance(slideStartPosition, GetCursorPosition()) >= (Screen.width * 0.05f))
-                        {
-                            moved = true;
-                        }
-                    }
-
-                    if (tempTouchs.phase == TouchPhase.Ended)
-                    {
-                        moved = false;
-                    }
-                    if (moved)
-                    {
-                        delta = GetCursorPosition() - prevPosition;
-                    }
-                    else
-                    {
-                        delta = Vector2.zero;
-                    }
-
-                    prevPosition = GetCursorPosition();
-                }
-
-            }
+            delta = GetCursorPosition() - prevPosition;
+        }
+        else
+        {
+            delta = Vector2.zero;
         }
 
+        prevPosition = GetCursorPosition();
+    }
 
+    public void DragStart()
+    {
+        /*
+        Debug.Log("drag start");
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(i) == false)
+            {
+                tempTouchs = Input.GetTouch(i);
+                break;
+            }
+        }*/
+        slideStartPosition = GetCursorPosition();
+    }
+    public void Draging()
+    {
         
-
+        if (Vector2.Distance(slideStartPosition, GetCursorPosition()) >= (Screen.width * 0.05f))
+        {
+            moved = true;
+        }
+    }
+    public void DragEnd()
+    {
+        moved = false;
+        drawFlag = false;
     }
 
 
@@ -110,6 +161,15 @@ public class InputManager : NetworkBehaviour {
     public void OnSkillUp()
     {
         skillTrigger = false;
+    }
+
+    public void OnTumblingDown()
+    {
+        tumbleTrigger = true;
+    }
+    public void OnTumblingUp()
+    {
+        tumbleTrigger = false;
     }
     
     public bool Moved()

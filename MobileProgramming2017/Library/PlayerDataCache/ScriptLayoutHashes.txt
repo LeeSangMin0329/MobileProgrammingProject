@@ -1,4 +1,4 @@
-Android
+WindowsStandalone
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9f07aaefd0255462bb6e4f9e5da6b2d4 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -124,7 +124,7 @@ b8ee2c05e3f81f93a68a289a33e95b44 Assembly-CSharp.dll:.EnemyCtrl
 a90dc8b521e039b2f7de70d40d7aa344 Assembly-CSharp.dll:.ItemDatabase
 74dd8eea001cc29441765b60b66dd887 Assembly-CSharp.dll:.InputManager
 eb7ca56a2bb6a82bfc60f1c306aa9086 Assembly-UnityScript.dll:.Lighting
-c43d7ff2fb476c8fe3fa9a5e3fca5fce Assembly-CSharp.dll:.GameRuleCtrl
+6ef9d44bf4069462a49da55c5bd65285 Assembly-CSharp.dll:.GameRuleCtrl
 1f7b838c5823757c798551a9d1ffc586 Assembly-CSharp.dll:.NamePlate
 998c570f84856acafa7bd7b04e94e163 Assembly-CSharp.dll:.CameraControl
 43294ec8a676944978bb7198ea43935c Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireLightScript

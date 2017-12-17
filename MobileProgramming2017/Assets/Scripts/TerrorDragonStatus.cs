@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TerrorDragonStatus : MonoBehaviour {
-
+    
     // flag
 
     public bool running = false;
@@ -28,7 +28,6 @@ public class TerrorDragonStatus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame

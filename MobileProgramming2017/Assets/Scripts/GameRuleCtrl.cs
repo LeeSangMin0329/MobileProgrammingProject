@@ -8,7 +8,7 @@ public class GameRuleCtrl : MonoBehaviour {
     public bool gameOver = false;
     public bool gameClear = false;
 
-    public float sceneChangeTime = 3.0f;
+    public float sceneChangeTime = 10.0f;
 
     public GameObject player;
     public GameObject playerPrefab;
@@ -16,6 +16,9 @@ public class GameRuleCtrl : MonoBehaviour {
     public FollowCamera followCamera;
 
     NetworkView netView;
+
+    public GameObject gameDefeatSprite;
+    public GameObject gameClearSprite;
 
     
     // Use this for initialization
@@ -74,12 +77,29 @@ public class GameRuleCtrl : MonoBehaviour {
     void GameOverOnNetwork()
     {
         gameOver = true;
+        if (gameDefeatSprite)
+        {
+            gameDefeatSprite.SetActive(true);
+        }
         Debug.Log("GameOver");
     }
 
     public void GameClear()
     {
+        if(!gameClear && Network.isServer)
+        {
+            netView.RPC("GameClearOnNetwork", RPCMode.AllBuffered);
+        }
+    }
+
+    [RPC]
+    void GameClearOnNetwork()
+    {
         gameClear = true;
+        if (gameClearSprite)
+        {
+            gameClearSprite.SetActive(true);
+        }
         Debug.Log("GameClear");
     }
 

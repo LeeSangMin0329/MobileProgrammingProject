@@ -39,6 +39,7 @@ public class EnemySynchronizer : MonoBehaviour {
         {
             transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 5.0f);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5.0f);
+           
         }
 	}
 
@@ -49,8 +50,10 @@ public class EnemySynchronizer : MonoBehaviour {
         {
             Vector3 pos = transform.position;
             Quaternion rot = transform.rotation;
+           
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
+            
             if(status != null)
             {
                 int hp = status.HP;
@@ -63,6 +66,7 @@ public class EnemySynchronizer : MonoBehaviour {
         {
             stream.Serialize(ref position);
             stream.Serialize(ref rotation);
+           
             if(status != null)
             {
                 int hp = 0;

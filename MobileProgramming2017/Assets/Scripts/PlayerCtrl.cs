@@ -313,15 +313,7 @@ public class PlayerCtrl : MonoBehaviour {
     {
         StateStartCommon();
         characterMove.enabled = false;
-        if (status.skillOn)
-        {
-            skillEnable = false;
-            status.skillOn = false;
-            if (skillOnEffect)
-            {
-                skillOnEffect.SetActive(false);
-            }
-        }
+        
     }
     void Hitting()
     {
@@ -332,6 +324,16 @@ public class PlayerCtrl : MonoBehaviour {
             status.knockDown = false;
             status.hit = false;
             immortal = false;
+            if (status.skillOn)
+            {
+                skillEnable = false;
+                status.skillOn = false;
+                skillID = 0;
+                if (skillOnEffect)
+                {
+                    skillOnEffect.SetActive(false);
+                }
+            }
             ChangeState(State.Walk);
             
         }
@@ -439,7 +441,7 @@ public class PlayerCtrl : MonoBehaviour {
                 }
                 immortal = true;
 
-                transform.LookAt(hitDirection);
+                transform.LookAt(hitDirection * -1f);
                 ChangeState(State.Hit);
             }
 
