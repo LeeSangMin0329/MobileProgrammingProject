@@ -108,7 +108,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 1
-  controlID: 153
+  controlID: 142
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 154
+  controlID: 143
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,8 +203,8 @@ MonoBehaviour:
     y: 515
     width: 722
     height: 416
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -228,8 +228,8 @@ MonoBehaviour:
     y: 0
     width: 307
     height: 931
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -278,8 +278,8 @@ MonoBehaviour:
     y: 0
     width: 479
     height: 931
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -388,14 +388,14 @@ MonoBehaviour:
     width: 720
     height: 494
   m_SceneLighting: 1
-  lastFramingTime: 185.50229596348225
+  lastFramingTime: 32.72076650428584
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.7760016, y: 0.03770943, z: 0.25388813}
+    m_Target: {x: 443.2831, y: 257.13196, z: 68.58913}
     speed: 2
-    m_Value: {x: -0.7760016, y: 0.03770943, z: 0.25388813}
+    m_Value: {x: 443.2831, y: 257.13196, z: 68.58913}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -418,13 +418,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.2535178, y: -0.5604794, z: 0.18542638, w: -0.7662954}
+    m_Target: {x: 0.0553937, y: 0.05239554, z: 0.0029107898, w: -0.99708474}
     speed: 2
-    m_Value: {x: -0.2535178, y: -0.5604794, z: 0.18542638, w: -0.7662954}
+    m_Value: {x: 0.055393692, y: 0.052395534, z: 0.0029107896, w: -0.9970846}
   m_Size:
-    m_Target: 0.2915619
+    m_Target: 409.96323
     speed: 2
-    m_Value: 0.2915619
+    m_Value: 409.96323
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -517,26 +517,26 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 56b4ffff1afcffff00000000
+    m_ExpandedIDs: 4e7fffff3480ffff6684fffff69efffffa9effffeef3ffff1afcffff000000003e3e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Heavy_Full_Metal_Sword
-      m_OriginalName: Heavy_Full_Metal_Sword
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -19368
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
   m_ExpandedScenes:
-  - Hunt00
+  - Menu
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -578,19 +578,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/3D Assets/Player/Heavy_Full_Metal_Sword
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/3D Assets/Player/Heavy_Full_Metal_Sword
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\GitReporsitory\mp2017\MobileProgramming2017
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: a4340000
-    m_LastClickedID: 13476
-    m_ExpandedIDs: 0000000068260000b82800004e290000ce2a00000a2b00000c2b0000c22f0000de320000b4330000a434000000ca9a3bffffff7f
+    m_SelectedIDs: 3a2d0000
+    m_LastClickedID: 11578
+    m_ExpandedIDs: 000000006a2600005a290000dc2a0000182b0000d22f000004330000de330000d234000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000068260000b8280000ce2a00000a2b00000c2b0000c22f0000de320000b4330000
+    m_ExpandedIDs: 000000006a2600005a290000dc2a0000182b0000d22f000004330000de330000d2340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -649,18 +649,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 28260000da2f0000bcb9000068ba00000c2b00002627000038280000f6280000f6270000c2280000d82800000c2800005c060000000000007a2f00007c2f0000b42b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Specular setup Materials
-      m_OriginalName: Specular setup Materials
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 11940
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:

@@ -47,6 +47,7 @@ public class GameRuleCtrl : MonoBehaviour {
             if(sceneChangeTime <= 0.0f)
             {
                 // time out game over
+                Resources.UnloadUnusedAssets();
                 UnityEngine.SceneManagement.SceneManager.LoadScene("BaseCamp");
             }
             return;
