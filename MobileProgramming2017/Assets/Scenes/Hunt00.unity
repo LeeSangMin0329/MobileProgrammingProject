@@ -142,7 +142,7 @@ MonoBehaviour:
   gameClear: 0
   sceneChangeTime: 3
   player: {fileID: 0}
-  playerPrefab: {fileID: 1069293024921374, guid: 803a8a6900dea4a47bb7077f629afc2d,
+  playerPrefab: {fileID: 1380115958249452, guid: dab18fff5b9f4834791436b219946f94,
     type: 2}
   startPoint: {fileID: 274362929}
   followCamera: {fileID: 1388742251}
@@ -542,7 +542,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6377f2d6e22fcae4c8467fb75925cd62, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7af4846ebfc2a1d4784e35de3c632591, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
