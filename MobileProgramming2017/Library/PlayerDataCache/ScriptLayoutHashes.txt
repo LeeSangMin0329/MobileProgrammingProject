@@ -109,6 +109,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BaseCampInteraction
 34cc888a35f550e5f6d40b4f0d846418 Assembly-CSharp.dll:DigitalRuby.PyroParticles.MeteorSwarmScript
 2e9bd2127f7a6255c621d6d5a4cbcc95 Assembly-CSharp.dll:.PlayerCtrl
+71d393d43d47be98db6581d56f134298 Assembly-CSharp.dll:.LoadingSceneManager
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -167,7 +168,8 @@ b2c92712d470dca5a4fa2c6f16be4198 Assembly-CSharp.dll:.MaterialChange
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireConstantBaseScript
 2b0d1bf7df1dadb2f1fa8efa0efe11fa Assembly-UnityScript.dll:.ConGUI
 23fabbacd2be26f9579979f0ecc9dd06 Assembly-CSharp.dll:.CharacterStatus
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MenuChange
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Open_to_Base
+3d843e1d1447d40d15e1eef4cef3ff2d Assembly-CSharp.dll:.MenuChange
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CharaSynchronizer
 f7486c054bde1836a03da6faae79ca15 Assembly-CSharp.dll:.TerrorDragonStatus
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HitArea

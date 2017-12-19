@@ -21,7 +21,7 @@ public class EntranceEvent : MonoBehaviour {
     void ChangeScene()
     {
         Resources.UnloadUnusedAssets();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Hunt00");
+        LoadingSceneManager.LoadScene("Hunt00");
     }
      
 

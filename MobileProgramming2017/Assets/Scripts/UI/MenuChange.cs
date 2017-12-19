@@ -19,7 +19,7 @@ public class MenuChange : MonoBehaviour {
     {
         startSeAudio.Play();
         Resources.UnloadUnusedAssets();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("BaseCamp");
+        LoadingSceneManager.LoadScene("BaseCamp");
     }
 
     public void SelectExit()

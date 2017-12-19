@@ -49,7 +49,7 @@ public class GameRuleCtrl : MonoBehaviour {
             {
                 // time out game over
                 Resources.UnloadUnusedAssets();
-                UnityEngine.SceneManagement.SceneManager.LoadScene("BaseCamp");
+                LoadingSceneManager.LoadScene("BaseCamp");
             }
             return;
         }
