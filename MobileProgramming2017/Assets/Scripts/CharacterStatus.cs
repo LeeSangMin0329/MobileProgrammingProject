@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterStatus : MonoBehaviour {
 
+    Inventory inven;
+
     public int HP = 1000;
     public int MaxHP = 1000;
     public float Stamina = 100;
@@ -35,11 +37,11 @@ public class CharacterStatus : MonoBehaviour {
     public bool uncontrollableMotion = true;
     public bool skillOn = false;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
+    void Start()
+    {
+        inven = FindObjectOfType<Inventory>();
+    }
+    
 	// Update is called once per frame
 	void Update () {
         if (!skillOn)
@@ -64,11 +66,25 @@ public class CharacterStatus : MonoBehaviour {
                 }
             }
         }
+        if (inven)
+        {
+            if (inven.hpItemTrigger)
+            {
+                inven.hpItemTrigger = false;
+                HP += 300;
+                if (HP > MaxHP)
+                {
+                    HP = MaxHP;
+                }
+            }
+        }
+       
 	}
 
     [RPC]
     public void SetName(string name)
     {
         characterName = name;
+       
     }
 }

@@ -7,9 +7,9 @@ public class Inventory : MonoBehaviour {
     public static Inventory instance;
     public Transform slot;
     public List<Slot> slotScripts = new List<Slot>();
-   // public Text text;
+    // public Text text;
     //public Transform draggingItem;
-
+    
     public RectTransform InvenRect;
 
     public float slotSize;
@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour {
     public int slotCount;
 
     private float EmptySlot;
-
+    
     void Awake()
     {
         Inventory.instance = this;
@@ -124,5 +124,11 @@ public class Inventory : MonoBehaviour {
                 break;
             }
         }
+    }
+
+    public bool hpItemTrigger = false;
+    public void useHpItem()
+    {
+        hpItemTrigger = true;
     }
 }

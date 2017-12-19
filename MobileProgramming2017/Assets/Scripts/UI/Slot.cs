@@ -10,7 +10,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public int number;
     public Item item;
     public static Inventory instance;
+    
 
+   
     public void OnPointerClick(PointerEventData data)
     {
         ItemUse();
@@ -37,6 +39,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler
                     if (Inventory.instance.slotScripts[i].item.itemName == item.itemName)
                     {
                         Inventory.instance.UpdateInventory(Inventory.instance.slotScripts[i].transform, i);
+                        if(item.itemName == "hp")
+                        {
+                            Inventory.instance.useHpItem();
+                        }
                     }
                 }
                 if(Inventory.instance.slotScripts[i].item == null)

@@ -22,7 +22,7 @@ public class TerrorDragonCtrl : MonoBehaviour {
     bool firstEngage = true;
 
     public float waitBaseTime = 2.0f; // motion to motion max delay
-    float waitTime;
+    public float waitTime;
     public float walkRange = 5.0f;
     float stopDistanceTargetToOwn = 6.0f;
     public float patternClassificationDistance = 30.0f;
@@ -48,10 +48,11 @@ public class TerrorDragonCtrl : MonoBehaviour {
 
     }
 
+    public bool standAlone = false;
     // Update is called once per frame
     void Update() {
 
-        if (!netView.isMine)
+        if (!netView.isMine && !standAlone)
         {
             return;
         }
@@ -152,30 +153,32 @@ public class TerrorDragonCtrl : MonoBehaviour {
         }
     }
 
+
+    Vector3 destinationPosition;
     void WalkStart()
     {
         StateStartCommon();
+        Debug.Log("walk");
     }
     void Walking()
     {
         if (waitTime > 0.0f)
         {
-            waitTime -= Time.deltaTime;
-
-            if (waitTime <= 0.0f)
+            waitTime -= 5.0f * Time.deltaTime;
+            if(waitTime <= 0.0f)
             {
+                basePosition = transform.position;
                 Vector2 randomValue = Random.insideUnitCircle * walkRange;
-                Vector3 destinationPosition = basePosition + new Vector3(randomValue.x, 0.0f, randomValue.y);
+                destinationPosition = basePosition + new Vector3(randomValue.x, 0.0f, randomValue.y);
                 characterMove.SetDestination(destinationPosition);
             }
         }
         else
         {
-
             if (characterMove.Arrived())
             {
-                basePosition = transform.position;
                 waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
+                ChangeState(State.Walk);
             }
             // discover user
             if (attackTarget)
@@ -212,10 +215,6 @@ public class TerrorDragonCtrl : MonoBehaviour {
                     }
                 }
 
-            }
-            else
-            {
-                ChangeState(State.Walk);
             }
         }
     }
@@ -431,8 +430,6 @@ public class TerrorDragonCtrl : MonoBehaviour {
     {
         status.died = true;
         FindObjectOfType<GameRuleCtrl>().GameClear();
-        Network.Destroy(gameObject);
-        Network.RemoveRPCs(netView.viewID);
         AudioSource.PlayClipAtPoint(deathSeClip, transform.position);
     }
 

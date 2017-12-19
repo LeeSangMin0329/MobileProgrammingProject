@@ -39,6 +39,7 @@ public class GameRuleCtrl : MonoBehaviour {
 
             NetworkManager networkManager = FindObjectOfType(typeof(NetworkManager)) as NetworkManager;
             player.GetComponent<NetworkView>().RPC("SetName", RPCMode.AllBuffered, networkManager.GetPlayerName());
+
         }
 
         if(gameOver || gameClear)

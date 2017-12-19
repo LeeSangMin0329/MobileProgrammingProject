@@ -565,6 +565,26 @@ Prefab:
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114564015616873342, guid: c77b928dbec6386409bfeace2dc6e8b6,
+        type: 2}
+      propertyPath: walkRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 148656041930560452, guid: c77b928dbec6386409bfeace2dc6e8b6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114532664808786116, guid: c77b928dbec6386409bfeace2dc6e8b6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564015616873342, guid: c77b928dbec6386409bfeace2dc6e8b6,
+        type: 2}
+      propertyPath: standAlone
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c77b928dbec6386409bfeace2dc6e8b6, type: 2}
   m_IsPrefabParent: 0
@@ -704,6 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9df475fb16cb0a488f48f5c2028bd09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSeClip: {fileID: 8300000, guid: 8f6dd9431f2b79f4abfff83d62b21c98, type: 3}
 --- !u!224 &1770253602
 RectTransform:
   m_ObjectHideFlags: 0
