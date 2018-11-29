@@ -52,9 +52,6 @@ public class AttackArea : MonoBehaviour {
         //attackInfo.attackPower = status.Power;
         attackInfo.attacker = transform.root.gameObject;
         attackInfo.collisionPosition = ownCollider.transform.position;
-        //bug
-        //attackInfo.collisionPosition.y = transform.root.position.y + 1;
-      
     }
 
     // @override
