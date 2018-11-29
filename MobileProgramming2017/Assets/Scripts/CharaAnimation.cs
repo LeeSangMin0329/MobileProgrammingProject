@@ -1,4 +1,6 @@
-﻿using System.Collections;
+// # hit, hitTrigger -> why exist 2 value from one animation? hit is useless
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
