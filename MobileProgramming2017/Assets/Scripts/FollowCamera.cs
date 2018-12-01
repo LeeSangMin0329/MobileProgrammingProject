@@ -1,4 +1,6 @@
-﻿using System.Collections;
+// # 'dir' must be changed depending to camera work
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
