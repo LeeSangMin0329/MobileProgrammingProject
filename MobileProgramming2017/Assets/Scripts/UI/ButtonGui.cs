@@ -8,7 +8,6 @@ public class ButtonGui : MonoBehaviour {
     float baseHeight = 480f;
     
 
-    InputManager inputManager;
     Vector2 playerStatusOffset = new Vector2(8f, 80f);
 
     Rect buttonRect = new Rect(0f, 0f, 50f, 50f);
